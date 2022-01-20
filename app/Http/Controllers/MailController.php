@@ -13,7 +13,7 @@ class MailController extends Controller
      * @param Request $request
      * @return JsonResponse
      */
-    public function index(Request $request): JsonResponse
+    public function store(Request $request): JsonResponse
     {
         $data = $request->validate([
             'email' => ['required', 'email', 'max:100'],
