@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Response;
 use Laravel\Socialite\Facades\Socialite;
 
 class LoginController extends Controller
@@ -61,6 +60,7 @@ class LoginController extends Controller
             'username' => $social->nickname,
             'provider' => $provider,
             'provider_id' => $social->id,
+            'refresh_token' => $social->refreshToken,
         ]);
 
         return $this->login($provider, $user);
