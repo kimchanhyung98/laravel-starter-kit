@@ -9,6 +9,8 @@
 </head>
 <body>
     <div id="app"></div>
+    <div id="token">{{ session('token') }}</div>
+
     <script src="{{ mix('js/app.js') }}" defer></script>
 </body>
 </html>
