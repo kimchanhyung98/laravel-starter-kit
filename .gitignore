@@ -1,3 +1,4 @@
+# Laravel
 /node_modules
 /public/hot
 /public/storage
@@ -11,6 +12,7 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
+composer.lock
 
 # Mix
 /public/css
@@ -18,9 +20,15 @@ yarn-error.log
 /public/mix-manifest.json
 package-lock.json
 
-# IDE
+# IDEs and editors
 /.idea
 /.vscode
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
 
 # Logs and databases
 *.log
