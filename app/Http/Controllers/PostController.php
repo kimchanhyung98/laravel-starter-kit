@@ -7,6 +7,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
+
 class PostController extends Controller
 {
     /**
@@ -24,7 +25,7 @@ class PostController extends Controller
     /**
      * 게시글 작성
      *
-     * @param Request $request
+     * @param  Request  $request
      * @return JsonResponse
      */
     public function store(Request $request): JsonResponse
@@ -45,7 +46,7 @@ class PostController extends Controller
     /**
      * 게시글 조회
      *
-     * @param Post $post
+     * @param  Post  $post
      * @return JsonResponse
      */
     public function show(Post $post): JsonResponse
@@ -58,8 +59,8 @@ class PostController extends Controller
     /**
      * 게시글 수정
      *
-     * @param Request $request
-     * @param Post $post
+     * @param  Request  $request
+     * @param  Post  $post
      * @return JsonResponse
      */
     public function update(Request $request, Post $post): JsonResponse
@@ -84,7 +85,7 @@ class PostController extends Controller
     /**
      * 게시글 삭제
      *
-     * @param Post $post
+     * @param  Post  $post
      * @return JsonResponse
      */
     public function destroy(Post $post): JsonResponse

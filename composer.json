@@ -13,9 +13,11 @@
     "guzzlehttp/guzzle": "^7.2",
     "laravel/framework": "^9.2",
     "laravel/sanctum": "^2.15",
+    "laravel/socialite": "^5.5",
     "laravel/tinker": "^2.7",
     "pusher/pusher-php-server": "^7.0",
-    "sentry/sentry-laravel": "^2.12"
+    "sentry/sentry-laravel": "^2.12",
+    "socialiteproviders/kakao": "^4.2"
   },
   "require-dev": {
     "roave/security-advisories": "dev-latest",
