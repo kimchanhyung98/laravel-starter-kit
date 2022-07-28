@@ -7,6 +7,7 @@ use App\Http\Controllers\{
 };
 use App\Http\Controllers\Auth\{
     LoginController,
+    RegisterController,
     SocialLoginController,
 };
 use Illuminate\Support\Facades\Route;
@@ -33,6 +34,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::group(['prefix' => 'auth'], static function () {
     Route::get('user', [UserController::class, 'auth'])->middleware('auth:sanctum');
     Route::post('login', [LoginController::class, 'login']);
+    Route::post('register', RegisterController::class);
 });
 
 

@@ -4,14 +4,13 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
@@ -20,7 +19,7 @@ return new class extends Migration
             //$table->timestamp('email_verified_at')->nullable()->comment('이메일 인증 시간');
             $table->string('password')->nullable()->comment('비밀번호');
 
-            $table->string('username', 20)->comment('이름');
+            $table->string('username', 20)->nullable()->comment('이름');
             $table->string('phone', 15)->unique()->nullable()->comment('전화번호');
 
             $table->string('provider')->nullable()->comment('소셜 로그인');
@@ -39,7 +38,7 @@ return new class extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('users');
     }
