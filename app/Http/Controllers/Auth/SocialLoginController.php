@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Exception;
 use Illuminate\Http\RedirectResponse;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -21,14 +22,17 @@ class SocialLoginController extends Controller
             return redirect('/');
         }
 
-        return Socialite::driver($provider)->redirect();
+        // The stateless method may be used to disable session state verification
+        return Socialite::driver($provider)->stateless()->redirect();
     }
+
 
     /**
      * Obtain the user information from Social service.
      *
      * @param  string  $provider
      * @return RedirectResponse
+     * @throws Exception
      */
     public function handleProviderCallback(string $provider): RedirectResponse
     {
@@ -42,7 +46,7 @@ class SocialLoginController extends Controller
         if ($user = User::where('email', $social->getEmail())->first()) {
             return $this->login($provider, $user);
         }
-        ddd($social);
+
         return $this->register($provider, $social);
     }
 
@@ -57,16 +61,17 @@ class SocialLoginController extends Controller
     private function register(string $provider, $social): RedirectResponse
     {
         $user = User::create([
-            'name' => $social->name,
-            'email' => $social->email,
-            'username' => $social->nickname,
+            'name' => $social->getName(),
+            'email' => $social->getEmail(),
+            'username' => $social->getNickname(),
             'provider' => $provider,
-            'provider_id' => $social->id,
+            'provider_id' => $social->getId(),
             'refresh_token' => $social->refreshToken,
         ]);
 
         return $this->login($provider, $user);
     }
+
 
     /**
      * Login the user then return the token.
