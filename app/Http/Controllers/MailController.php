@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Mail;
 class MailController extends Controller
 {
     /**
-     * @param Request $request
+     * @param  Request  $request
      * @return JsonResponse
      */
     public function store(Request $request): JsonResponse

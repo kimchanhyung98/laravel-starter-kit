@@ -37,11 +37,8 @@ class SocialLoginController extends Controller
     public function handleProviderCallback(string $provider): RedirectResponse
     {
         // $user = Socialite::driver($provider)->user();
-
         // The stateless method may be used to disable session state verification
         $social = Socialite::driver($provider)->stateless()->user();
-
-        // $user->token;
 
         if ($user = User::where('email', $social->getEmail())->first()) {
             return $this->login($provider, $user);
