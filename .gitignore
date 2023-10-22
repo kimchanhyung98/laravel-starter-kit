@@ -4,16 +4,37 @@
 /public/hot
 /public/storage
 /storage/*.key
+/storage/clockwork
 /vendor
-.env
-.env.backup
-.env.production
 .phpunit.result.cache
 Homestead.json
 Homestead.yaml
+docker-compose.override.yml
 auth.json
-npm-debug.log
-yarn-error.log
+*.log
+*.sql
+
+# Environment
+.env
+.env.testing
+.env.backup
+.env.production
+.env.development
+
+# IDE
 /.fleet
 /.idea
 /.vscode
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# etc
+.DS_Store
+.DS_Store?
+.Trashes
+ehthumbs.db
+Thumbs.db
