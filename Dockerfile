@@ -61,9 +61,9 @@ COPY --chown=www:www-data . /var/www
 RUN chmod -R ug+w /var/www/storage
 
 # Copy nginx,php,supervisor configs
-RUN cp supervisor.conf /etc/supervisord.conf
-RUN cp php.ini /usr/local/etc/php/conf.d/app.ini
-RUN cp nginx.conf /etc/nginx/sites-enabled/default
+RUN cp docker/supervisor.conf /etc/supervisord.conf
+RUN cp docker/php.ini /usr/local/etc/php/conf.d/app.ini
+RUN cp docker/nginx.conf /etc/nginx/sites-enabled/default
 
 # Deployment steps
 # RUN composer install --optimize-autoloader --no-dev
@@ -73,4 +73,4 @@ RUN composer install --no-cache
 RUN chmod +x /var/www/run.sh
 
 EXPOSE 80
-ENTRYPOINT ["/var/www/run.sh"]
+ENTRYPOINT ["/var/www/docker/run.sh"]
