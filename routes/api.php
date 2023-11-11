@@ -1,6 +1,8 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Auth\AppleController;
+use App\Http\Controllers\Auth\KakaoController;
+use App\Http\Controllers\Auth\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +16,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+// User
+Route::group(['prefix' => 'login'], static function () {
+    Route::post('apple', AppleController::class);
+    Route::post('kakao', KakaoController::class);
+});
+
+Route::group(['middleware' => 'auth:sanctum'], static function () {
+    // Route::get('user', UserController::class);
+});
+
+// Board
+Route::group(['prefix' => 'posts'], static function () {
+    // @todo
 });
