@@ -17,13 +17,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 // User
-Route::group(['prefix' => 'login'], static function () {
+Route::prefix('login')->group(static function () {
     Route::post('apple', AppleController::class);
     Route::post('kakao', KakaoController::class);
 });
 
-Route::group(['middleware' => 'auth:sanctum'], static function () {
-    // Route::get('user', UserController::class);
+Route::group(['middleware' => 'auth:sanctum', 'prefix' => 'user'], static function () {
+    Route::get('/', UserController::class);
 });
 
 // Board
