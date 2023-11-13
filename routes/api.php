@@ -17,16 +17,24 @@ use Illuminate\Support\Facades\Route;
 */
 
 // User
-Route::prefix('login')->group(static function () {
+Route::prefix('auth')->group(static function () {
+    Route::get('user', UserController::class)->middleware('auth:sanctum');
+
     Route::post('apple', AppleController::class);
     Route::post('kakao', KakaoController::class);
 });
 
-Route::group(['middleware' => 'auth:sanctum', 'prefix' => 'user'], static function () {
-    Route::get('/', UserController::class);
-});
-
 // Board
-Route::group(['prefix' => 'posts'], static function () {
-    // @todo
+Route::group(['prefix' => 'posts', 'controller' => 'PostController'], static function () {
+    Route::get('/', 'index');
+    Route::get('{post}', 'show');
+
+    Route::middleware('auth:sanctum')->group(static function () {
+        Route::post('/', 'store');
+        Route::prefix('{post}')->group(static function () {
+            // Route::get('/', 'show')->withoutMiddleware('auth:sanctum');
+            Route::put('/', 'update');
+            Route::delete('/', 'destroy');
+        });
+    });
 });
