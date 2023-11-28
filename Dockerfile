@@ -1,4 +1,4 @@
-FROM php:8.2-fpm
+FROM php:8.3-fpm
 LABEL maintainer="kimchanhyung98@gmail.com"
 
 # Set working directory
@@ -48,8 +48,7 @@ RUN touch /var/log/php/error.log && chmod 777 /var/log/php/error.log
 RUN touch /var/log/redis/access.log && chmod 777 /var/log/redis/access.log
 RUN touch /var/log/redis/error.log && chmod 777 /var/log/redis/error.log
 
-
-#FROM public.ecr.aws/ecr_name/php-8.2:latest
+#FROM public.ecr.aws/ecr_name/php-8.3:latest
 
 # Set working directory
 #WORKDIR /var/www
