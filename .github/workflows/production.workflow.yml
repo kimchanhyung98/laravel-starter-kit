@@ -1,5 +1,6 @@
-name: Deploy Production
-# Upload Docker Image to ECR & Pull Image to Beanstalk
+name: Deploy EB
+# https://github.com/actions/checkout#checkout-multiple-repos-private
+# https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token#creating-a-token
 
 on:
   push:
@@ -8,11 +9,9 @@ on:
 
 jobs:
   deploy:
-    name: Deploy Production
     runs-on: ubuntu-latest
+    timeout-minutes: 10
 
-    # https://github.com/actions/checkout#checkout-multiple-repos-private
-    # https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token#creating-a-token
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -20,8 +19,8 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-access-key-id: ${{ secrets.PRODUCTION_AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.PRODUCTION_AWS_SECRET_ACCESS_KEY }}
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
 
       - name: Login to Amazon ECR
@@ -32,7 +31,7 @@ jobs:
         id: build-image
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          ECR_REPOSITORY: laravel-production
+          ECR_REPOSITORY: laravel-starter-kit
           IMAGE_TAG: latest
         run: |
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
@@ -46,21 +45,21 @@ jobs:
           format: YYYYMMDD_HH-mm-ss
           utcOffset: '+09:00'
 
-      - name: Generate production package
+      - name: Generate package
         run: |
           cd app
           mkdir -p deploy
-          cp docker/Dockerrun-production.aws.json deploy/Dockerrun.aws.json
+          cp docker/Dockerrun.aws.json deploy/Dockerrun.aws.json
           cd deploy && zip -r deploy.zip .
 
       - name: Beanstalk Deploy
         uses: einaregilsson/beanstalk-deploy@v14
         with:
-          aws_access_key: ${{ secrets.PRODUCTION_AWS_ACCESS_KEY_ID }}
-          aws_secret_key: ${{ secrets.PRODUCTION_AWS_SECRET_ACCESS_KEY }}
-          application_name: laravel
-          environment_name: laravel-production
-          version_label: laravel-production-${{steps.current-time.outputs.formattedTime}}
+          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          application_name: laravel-starter-kit-app
+          environment_name: laravel-starter-kit
+          version_label: laravel-starter-kit-${{steps.current-time.outputs.formattedTime}}
           region: ap-northeast-2
           deployment_package: app/deploy/deploy.zip
           wait_for_environment_recovery: 200
@@ -68,9 +67,9 @@ jobs:
       - name: Slack notifications
         uses: 8398a7/action-slack@v3
         with:
-          job_name: Deploy Production
+          job_name: Deploy laravel-starter-kit
           status: ${{ job.status }}
-          author_name: Laravel production deploy
+          author_name: beanstalk-deploy
           fields: all
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
