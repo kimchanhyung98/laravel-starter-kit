@@ -8,24 +8,25 @@ use App\Http\Resources\Auth\AccessTokenResource;
 use App\Models\User;
 use Exception;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class SignInController extends Controller
 {
     public function __invoke(SignInRequest $request)
     {
         try {
-            if (!Auth::attempt($request->only('email', 'password'))) {
-                abort(401, 'invalid credentials');
-            }
-
             $user = User::where('email', $request->email)->firstOrFail();
+
+            if (!Hash::check($request->password, $user->password)) {
+                abort(401);
+            }
         } catch (Exception $e) {
             logger($e);
-            abort($e->getCode(), $e->getMessage());
+            abort(401, 'invalid credentials');
         }
 
         return new AccessTokenResource(
-            $user->createToken('token-name')->plainTextToken
+            $user->createToken('api')->plainTextToken
         );
     }
 }
