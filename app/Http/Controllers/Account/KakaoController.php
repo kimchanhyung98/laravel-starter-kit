@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Account;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Auth\AccessTokenResource;
@@ -22,7 +22,7 @@ class KakaoController extends Controller
     {
         DB::beginTransaction();
         try {
-            config()->set('services.kakao.redirect', $request->redirect_uri);
+            // config()->set('services.kakao.redirect', $request->redirect_uri);
             $token = Socialite::driver(self::PROVIDER)->getAccessTokenResponse($request->code)['access_token'];
             $socialUser = Socialite::driver(self::PROVIDER)->userFromToken($token);
 

@@ -5,7 +5,7 @@ namespace App\Http\Resources\Post;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class PostMessageResource extends JsonResource
+class MessageResource extends JsonResource
 {
     public function toArray(Request $request): array
     {
