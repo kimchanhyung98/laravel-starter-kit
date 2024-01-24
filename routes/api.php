@@ -4,7 +4,7 @@ use App\Http\Controllers\Account\AppleController;
 use App\Http\Controllers\Account\KakaoController;
 use App\Http\Controllers\Account\SignInController;
 use App\Http\Controllers\Account\SignUpController;
-use App\Http\Controllers\Auth\UserController;
+use App\Http\Controllers\Account\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
