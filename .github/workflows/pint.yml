@@ -2,9 +2,6 @@ name: Fix PHP code style (Pint)
 
 on:
   pull_request:
-    branches:
-      - main
-      - develop
     paths:
       - '**/*.php'
 
