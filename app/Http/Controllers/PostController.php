@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\Post\PostIndexResource;
-use App\Http\Resources\Post\PostMessageResource;
-use App\Http\Resources\Post\PostShowResource;
+use App\Http\Resources\Post\IndexResource;
+use App\Http\Resources\Post\MessageResource;
+use App\Http\Resources\Post\ShowResource;
 use App\Models\Board\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,9 +14,9 @@ class PostController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): PostIndexResource
+    public function index(): IndexResource
     {
-        return new PostIndexResource(
+        return new IndexResource(
             Post::with('user')->paginate(10)
         );
     }
@@ -24,7 +24,7 @@ class PostController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request): PostMessageResource
+    public function store(Request $request): MessageResource
     {
         $post = Post::create([
             'user_id' => Auth::id(),
@@ -34,7 +34,7 @@ class PostController extends Controller
             'is_open' => $request->is_open ?? false,
         ]);
 
-        return new PostMessageResource([
+        return new MessageResource([
             'id' => $post->id,
             'message' => '게시글이 등록되었습니다.',
         ]);
@@ -43,17 +43,17 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Post $post): PostShowResource
+    public function show(Post $post): ShowResource
     {
         $post->increment('hit');
 
-        return new PostShowResource($post);
+        return new ShowResource($post);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Post $post): PostMessageResource
+    public function update(Request $request, Post $post): MessageResource
     {
         if ($post->user_id !== Auth::id()) {
             abort(403, '게시글 작성자만 수정할 수 있습니다.');
@@ -66,7 +66,7 @@ class PostController extends Controller
             'is_open' => $request->is_open ?? false,
         ]);
 
-        return new PostMessageResource([
+        return new MessageResource([
             'id' => $post->id,
             'message' => '게시글이 수정되었습니다.',
         ]);
@@ -75,7 +75,7 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Post $post): PostMessageResource
+    public function destroy(Post $post): MessageResource
     {
         if ($post->user_id !== Auth::id()) {
             abort(403, '게시글 작성자만 삭제할 수 있습니다.');
@@ -83,7 +83,7 @@ class PostController extends Controller
 
         $post->delete();
 
-        return new PostMessageResource([
+        return new MessageResource([
             'id' => 0,
             'message' => '게시글이 삭제되었습니다.',
         ]);
