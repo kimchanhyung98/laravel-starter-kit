@@ -16,9 +16,6 @@ class UserResource extends JsonResource
             'email' => $this->email,
             'phone' => $this->phone,
             'provider' => $this->provider,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
-            'deleted_at' => $this->whenNotNull($this->deleted_at),
         ];
     }
 }

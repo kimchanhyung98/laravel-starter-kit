@@ -5,7 +5,7 @@ namespace App\Http\Resources\Post;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class PostIndexResource extends JsonResource
+class ShowResource extends JsonResource
 {
     public function toArray(Request $request): array
     {
@@ -17,6 +17,7 @@ class PostIndexResource extends JsonResource
             ],
             'type' => $this->type,
             'title' => $this->title,
+            'contents' => $this->contents,
             'hit' => $this->hit,
         ];
     }
