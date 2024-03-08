@@ -18,6 +18,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// health check
+Route::get('healthcheck', 'HealthCheckController');
+
+// Account
 Route::prefix('accounts')->group(static function () {
     Route::post('signup', SignUpController::class);
     // Route::get('verify', VerifyController::class);
