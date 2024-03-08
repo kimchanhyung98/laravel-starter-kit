@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Account;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Account\SignUpRequest;
-use App\Http\Resources\Auth\AccessTokenResource;
+use App\Http\Resources\Account\AccessTokenResource;
 use App\Models\User;
 use Exception;
 use Illuminate\Support\Facades\DB;
@@ -24,7 +24,7 @@ class SignUpController extends Controller
                 'password' => Hash::make($request->password),
             ]);
 
-            if (!$user->wasRecentlyCreated) {
+            if (! $user->wasRecentlyCreated) {
                 abort(409, 'already exists');
             }
             // $user->sendEmailVerificationNotification();

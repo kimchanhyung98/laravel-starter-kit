@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Account;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Auth\AccessTokenResource;
+use App\Http\Resources\Account\AccessTokenResource;
 use App\Models\User;
 use App\Models\User\UserApple;
 use Carbon\CarbonImmutable;
