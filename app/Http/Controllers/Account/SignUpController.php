@@ -24,7 +24,7 @@ class SignUpController extends Controller
                 'password' => Hash::make($request->password),
             ]);
 
-            if (!$user->wasRecentlyCreated) {
+            if (! $user->wasRecentlyCreated) {
                 abort(409, 'already exists');
             }
             // $user->sendEmailVerificationNotification();
