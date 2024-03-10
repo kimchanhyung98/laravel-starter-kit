@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Account;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Auth\AccessTokenResource;
+use App\Http\Resources\Account\AccessTokenResource;
 use App\Models\User;
 use App\Models\User\UserKakao;
 use Exception;
@@ -13,10 +13,12 @@ use Laravel\Socialite\Facades\Socialite;
 
 class KakaoController extends Controller
 {
-    public const PROVIDER = 'kakao';
+    public const string PROVIDER = 'kakao';
 
     /**
-     * Handle the incoming request.
+     * SocialLogin (Kakao)
+     *
+     * @return AccessTokenResource
      */
     public function __invoke(Request $request)
     {

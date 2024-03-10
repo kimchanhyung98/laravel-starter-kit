@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Account;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Auth\AccessTokenResource;
+use App\Http\Resources\Account\AccessTokenResource;
 use App\Models\User;
 use App\Models\User\UserApple;
 use Carbon\CarbonImmutable;
@@ -15,7 +15,7 @@ use Lcobucci\JWT\Configuration;
 
 class AppleController extends Controller
 {
-    public const PROVIDER = 'apple';
+    public const string PROVIDER = 'apple';
 
     private function __construct(
         public Configuration $jwtConfig
@@ -24,7 +24,9 @@ class AppleController extends Controller
     }
 
     /**
-     * Handle the incoming request.
+     * SocialLogin (Apple)
+     *
+     * @return AccessTokenResource
      */
     public function __invoke(Request $request)
     {
