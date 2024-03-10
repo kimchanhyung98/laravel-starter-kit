@@ -13,10 +13,12 @@ use Laravel\Socialite\Facades\Socialite;
 
 class KakaoController extends Controller
 {
-    public const PROVIDER = 'kakao';
+    public const string PROVIDER = 'kakao';
 
     /**
-     * Handle the incoming request.
+     * SocialLogin (Kakao)
+     *
+     * @return AccessTokenResource
      */
     public function __invoke(Request $request)
     {

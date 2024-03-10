@@ -11,6 +11,11 @@ use Illuminate\Support\Facades\Hash;
 
 class SignInController extends Controller
 {
+    /**
+     * Sign in
+     *
+     * @return AccessTokenResource
+     */
     public function __invoke(SignInRequest $request)
     {
         try {

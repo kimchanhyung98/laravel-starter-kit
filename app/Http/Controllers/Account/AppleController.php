@@ -15,7 +15,7 @@ use Lcobucci\JWT\Configuration;
 
 class AppleController extends Controller
 {
-    public const PROVIDER = 'apple';
+    public const string PROVIDER = 'apple';
 
     private function __construct(
         public Configuration $jwtConfig
@@ -24,7 +24,9 @@ class AppleController extends Controller
     }
 
     /**
-     * Handle the incoming request.
+     * SocialLogin (Apple)
+     *
+     * @return AccessTokenResource
      */
     public function __invoke(Request $request)
     {
