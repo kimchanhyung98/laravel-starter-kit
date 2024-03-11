@@ -5,6 +5,7 @@ use App\Http\Controllers\Account\KakaoController;
 use App\Http\Controllers\Account\SignInController;
 use App\Http\Controllers\Account\SignUpController;
 use App\Http\Controllers\Account\UserController;
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,7 +38,7 @@ Route::prefix('accounts')->group(static function () {
 });
 
 // Board
-Route::group(['prefix' => 'posts', 'controller' => 'PostController'], static function () {
+Route::group(['prefix' => 'posts', 'controller' => PostController::class], static function () {
     Route::get('/', 'index');
     Route::get('{post}', 'show');
 

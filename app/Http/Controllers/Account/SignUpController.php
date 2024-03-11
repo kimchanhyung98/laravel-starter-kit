@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Account;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Account\SignUpRequest;
-use App\Http\Resources\Auth\AccessTokenResource;
+use App\Http\Resources\Account\AccessTokenResource;
 use App\Models\User;
 use Exception;
 use Illuminate\Support\Facades\DB;
@@ -12,6 +12,11 @@ use Illuminate\Support\Facades\Hash;
 
 class SignUpController extends Controller
 {
+    /**
+     * Sign up
+     *
+     * @return AccessTokenResource
+     */
     public function __invoke(SignUpRequest $request)
     {
         DB::beginTransaction();

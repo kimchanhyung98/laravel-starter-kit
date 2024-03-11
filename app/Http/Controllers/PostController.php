@@ -11,9 +11,6 @@ use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index(): IndexResource
     {
         return new IndexResource(
@@ -21,9 +18,6 @@ class PostController extends Controller
         );
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request): MessageResource
     {
         $post = Post::create([
@@ -40,9 +34,6 @@ class PostController extends Controller
         ]);
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Post $post): ShowResource
     {
         $post->increment('hit');
@@ -50,9 +41,6 @@ class PostController extends Controller
         return new ShowResource($post);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Post $post): MessageResource
     {
         if ($post->user_id !== Auth::id()) {
@@ -72,9 +60,6 @@ class PostController extends Controller
         ]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Post $post): MessageResource
     {
         if ($post->user_id !== Auth::id()) {

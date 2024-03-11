@@ -13,5 +13,6 @@
 ```bash
 brew install php@8.3 composer
 composer install
-./vendor/bin/sail up
+sail up # or ./vendor/bin/sail up 
+sail artisan migrate --seed
 ```
