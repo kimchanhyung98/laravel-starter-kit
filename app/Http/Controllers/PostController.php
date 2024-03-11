@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Resources\Post\IndexResource;
 use App\Http\Resources\Post\MessageResource;
 use App\Http\Resources\Post\ShowResource;
-use App\Models\Board\Post;
+use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\Auth;
