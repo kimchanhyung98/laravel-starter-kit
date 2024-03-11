@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Models\Board;
+namespace App\Models;
 
 use App\Models\Scopes\ViewablePostScope;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
