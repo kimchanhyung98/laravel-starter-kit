@@ -10,8 +10,8 @@ class MessageResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id' => $this->id,
-            'message' => $this->message,
+            'id' => $this->resource['id'],
+            'message' => $this->resource['message'],
         ];
     }
 }

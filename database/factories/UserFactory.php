@@ -6,39 +6,41 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
-/**
- * @extends Factory<User>
- */
 class UserFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
+    protected $model = User::class;
+
     public function definition(): array
     {
         return [
             'name' => fake()->unique()->name(),
-            'nickname' => fake()->userName(),
+            'nickname' => fake()->unique()->userName(),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
+            'password' => bcrypt('password'),
             'phone' => fake()->phoneNumber(),
-            'provider' => fake()->randomElement(['apple', 'kakao']),
-            'provider_id' => fake()->uuid(),
-            'provider_token' => fake()->randomNumber(15, true),
             'remember_token' => Str::random(10),
+            'provider' => null,
+            'provider_id' => null,
+            'provider_token' => null,
         ];
     }
 
-    /**
-     * Indicate that the model's email address should be unverified.
-     */
-    public function unverified(): static
+    public function apple(): UserFactory
     {
-        return $this->state(fn (array $attributes) => [
-            'email_verified_at' => null,
-            'phone' => null,
+        return $this->state([
+            'provider' => 'apple',
+            'provider_id' => '000123.'.fake()->uuid(),
+            'provider_token' => fake()->md5,
+        ]);
+    }
+
+    public function kakao(): UserFactory
+    {
+        return $this->state([
+            'provider' => 'kakao',
+            'provider_id' => fake()->numberBetween(1000000000, 5000000000),
+            'provider_token' => fake()->md5,
         ]);
     }
 }
