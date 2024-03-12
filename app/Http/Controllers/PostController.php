@@ -5,15 +5,16 @@ namespace App\Http\Controllers;
 use App\Http\Resources\Post\IndexResource;
 use App\Http\Resources\Post\MessageResource;
 use App\Http\Resources\Post\ShowResource;
-use App\Models\Board\Post;
+use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
-    public function index(): IndexResource
+    public function index(): AnonymousResourceCollection
     {
-        return new IndexResource(
+        return IndexResource::collection(
             Post::with('user')->paginate(10)
         );
     }
