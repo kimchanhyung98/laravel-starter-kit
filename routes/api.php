@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Account
 Route::prefix('accounts')->group(static function () {
     Route::post('signup', SignUpController::class);
     // Route::get('verify', VerifyController::class);
