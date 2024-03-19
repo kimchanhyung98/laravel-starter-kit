@@ -16,11 +16,11 @@ class UserAppleFactory extends Factory
 
         return [
             'user_id' => $user->id,
-            'name' => $user->name,
-            'email' => $user->email,
-            'sub' => $user->provider_id,
+            'name'    => $user->name,
+            'email'   => $user->email,
+            'sub'     => $user->provider_id,
             'at_hash' => fake()->md5,
-            'token' => $user->provider_token,
+            'token'   => $user->provider_token,
         ];
     }
 }

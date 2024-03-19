@@ -22,15 +22,15 @@ class PostController extends Controller
     public function store(Request $request): MessageResource
     {
         $post = Post::create([
-            'user_id' => Auth::id(),
-            'type' => $request->type ?? null,
-            'title' => $request->title,
+            'user_id'  => Auth::id(),
+            'type'     => $request->type ?? null,
+            'title'    => $request->title,
             'contents' => $request->contents,
-            'is_open' => $request->is_open ?? false,
+            'is_open'  => $request->is_open ?? false,
         ]);
 
         return new MessageResource([
-            'id' => $post->id,
+            'id'      => $post->id,
             'message' => '게시글이 등록되었습니다.',
         ]);
     }
@@ -49,14 +49,14 @@ class PostController extends Controller
         }
 
         $post->update([
-            'type' => $request->type ?? null,
-            'title' => $request->title,
+            'type'     => $request->type ?? null,
+            'title'    => $request->title,
             'contents' => $request->contents,
-            'is_open' => $request->is_open ?? false,
+            'is_open'  => $request->is_open ?? false,
         ]);
 
         return new MessageResource([
-            'id' => $post->id,
+            'id'      => $post->id,
             'message' => '게시글이 수정되었습니다.',
         ]);
     }
@@ -70,7 +70,7 @@ class PostController extends Controller
         $post->delete();
 
         return new MessageResource([
-            'id' => 0,
+            'id'      => 0,
             'message' => '게시글이 삭제되었습니다.',
         ]);
     }

@@ -24,7 +24,7 @@ class AppleController extends Controller
     }
 
     /**
-     * SocialLogin (Apple)
+     * SocialLogin (Apple).
      *
      * @return AccessTokenResource
      */
@@ -33,26 +33,27 @@ class AppleController extends Controller
         $this->getToken($request->redirect_uri);
 
         DB::beginTransaction();
+
         try {
             $token = Socialite::driver(self::PROVIDER)->getAccessTokenResponse($request->code);
             $socialUser = Socialite::driver(self::PROVIDER)->userFromToken($token['id_token']);
 
             $user = User::firstOrCreate([
-                'provider' => self::PROVIDER,
+                'provider'    => self::PROVIDER,
                 'provider_id' => $socialUser->getId(),
             ], [
-                'name' => $socialUser->getName(),
+                'name'  => $socialUser->getName(),
                 'email' => $socialUser->getEmail(),
             ]);
 
             if ($user->wasRecentlyCreated) {
                 UserApple::create([
                     'user_id' => $user->id,
-                    'name' => $socialUser->getName(),
-                    'email' => $socialUser->getEmail(),
-                    'sub' => $socialUser->getId(),
+                    'name'    => $socialUser->getName(),
+                    'email'   => $socialUser->getEmail(),
+                    'sub'     => $socialUser->getId(),
                     'at_hash' => $socialUser->user['at_hash'] ?? null,
-                    'token' => $socialUser->token,
+                    'token'   => $socialUser->token,
                 ]);
             }
 
@@ -69,7 +70,7 @@ class AppleController extends Controller
     }
 
     /**
-     * Apple JWT Token 설정
+     * Apple JWT Token 설정.
      */
     private function getToken($redirectUri): void
     {

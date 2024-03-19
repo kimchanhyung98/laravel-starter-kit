@@ -10,7 +10,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Post extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
+    use SoftDeletes;
 
     protected $fillable = [
         'user_id',
@@ -30,7 +31,7 @@ class Post extends Model
 
     protected static function booted(): void
     {
-        static::addGlobalScope(new ViewablePostScope);
+        static::addGlobalScope(new ViewablePostScope());
     }
 
     public function user(): BelongsTo

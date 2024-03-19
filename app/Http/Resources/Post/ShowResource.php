@@ -10,16 +10,16 @@ class ShowResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id' => $this->id,
+            'id'   => $this->id,
             'user' => [
                 // 'id' => $this->user->id,
-                'name' => $this->user->name,
+                'name'     => $this->user->name,
                 'nickname' => $this->user->nickname,
             ],
-            'type' => $this->type,
-            'title' => $this->title,
+            'type'     => $this->type,
+            'title'    => $this->title,
             'contents' => $this->contents,
-            'hit' => $this->hit,
+            'hit'      => $this->hit,
         ];
     }
 }

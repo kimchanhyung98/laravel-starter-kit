@@ -10,14 +10,14 @@ class IndexResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id' => $this->id,
+            'id'   => $this->id,
             'user' => [
-                'id' => $this->user->id,
+                'id'   => $this->user->id,
                 'name' => $this->user->name,
             ],
-            'type' => $this->type,
+            'type'  => $this->type,
             'title' => $this->title,
-            'hit' => $this->hit,
+            'hit'   => $this->hit,
         ];
     }
 }

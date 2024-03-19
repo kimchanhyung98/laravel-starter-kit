@@ -8,12 +8,12 @@ use Illuminate\Http\JsonResponse;
 class HealthCheckController extends Controller
 {
     /**
-     * HealthCheck
+     * HealthCheck.
      */
     public function __invoke(): JsonResponse
     {
         return response()->json([
-            'status' => ! Post::first() ? 'unhealthy' : 'healthy',
+            'status' => !Post::first() ? 'unhealthy' : 'healthy',
         ]);
     }
 }
