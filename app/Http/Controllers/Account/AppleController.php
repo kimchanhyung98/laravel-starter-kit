@@ -39,21 +39,21 @@ class AppleController extends Controller
             $socialUser = Socialite::driver(self::PROVIDER)->userFromToken($token['id_token']);
 
             $user = User::firstOrCreate([
-                'provider'    => self::PROVIDER,
+                'provider' => self::PROVIDER,
                 'provider_id' => $socialUser->getId(),
             ], [
-                'name'  => $socialUser->getName(),
+                'name' => $socialUser->getName(),
                 'email' => $socialUser->getEmail(),
             ]);
 
             if ($user->wasRecentlyCreated) {
                 UserApple::create([
                     'user_id' => $user->id,
-                    'name'    => $socialUser->getName(),
-                    'email'   => $socialUser->getEmail(),
-                    'sub'     => $socialUser->getId(),
+                    'name' => $socialUser->getName(),
+                    'email' => $socialUser->getEmail(),
+                    'sub' => $socialUser->getId(),
                     'at_hash' => $socialUser->user['at_hash'] ?? null,
-                    'token'   => $socialUser->token,
+                    'token' => $socialUser->token,
                 ]);
             }
 

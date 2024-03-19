@@ -21,7 +21,7 @@ class SignInController extends Controller
         try {
             $user = User::where('email', $request->email)->firstOrFail();
 
-            if (!Hash::check($request->password, $user->password)) {
+            if (! Hash::check($request->password, $user->password)) {
                 abort(401);
             }
         } catch (Exception $e) {

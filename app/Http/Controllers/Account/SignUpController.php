@@ -25,12 +25,12 @@ class SignUpController extends Controller
             $user = User::firstOrCreate([
                 'email' => $request->email,
             ], [
-                'name'     => $request->name,
+                'name' => $request->name,
                 'nickname' => $request->nickname ?? $request->name,
                 'password' => Hash::make($request->password),
             ]);
 
-            if (!$user->wasRecentlyCreated) {
+            if (! $user->wasRecentlyCreated) {
                 abort(409, 'already exists');
             }
             // $user->sendEmailVerificationNotification();

@@ -30,26 +30,26 @@ class KakaoController extends Controller
             $socialUser = Socialite::driver(self::PROVIDER)->userFromToken($token);
 
             $user = User::firstOrCreate([
-                'provider'    => self::PROVIDER,
+                'provider' => self::PROVIDER,
                 'provider_id' => $socialUser->getId(),
             ], [
-                'name'  => $socialUser->getName(),
+                'name' => $socialUser->getName(),
                 'email' => $socialUser->getEmail(),
             ]);
 
             if ($user->wasRecentlyCreated) {
                 $account = $socialUser->user['kakao_account'];
                 UserKakao::create([
-                    'user_id'   => $user->id,
-                    'email'     => $socialUser->getEmail(),
-                    'name'      => $socialUser->getName(),
-                    'nickname'  => $socialUser->getNickname(),
-                    'avatar'    => $socialUser->getAvatar(),
-                    'gender'    => $account['gender'] ?? null,
-                    'birthday'  => $account['birthday'] ?? null,
-                    'calendar'  => $account['birthday_type'] ?? null,
+                    'user_id' => $user->id,
+                    'email' => $socialUser->getEmail(),
+                    'name' => $socialUser->getName(),
+                    'nickname' => $socialUser->getNickname(),
+                    'avatar' => $socialUser->getAvatar(),
+                    'gender' => $account['gender'] ?? null,
+                    'birthday' => $account['birthday'] ?? null,
+                    'calendar' => $account['birthday_type'] ?? null,
                     'age_range' => $account['age_range'] ?? null,
-                    'sub'       => $socialUser->getId(),
+                    'sub' => $socialUser->getId(),
                 ]);
             }
 

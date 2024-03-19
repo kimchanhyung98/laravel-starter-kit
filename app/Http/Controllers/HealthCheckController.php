@@ -13,7 +13,7 @@ class HealthCheckController extends Controller
     public function __invoke(): JsonResponse
     {
         return response()->json([
-            'status' => !Post::first() ? 'unhealthy' : 'healthy',
+            'status' => ! Post::first() ? 'unhealthy' : 'healthy',
         ]);
     }
 }
