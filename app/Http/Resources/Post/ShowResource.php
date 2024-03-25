@@ -20,6 +20,7 @@ class ShowResource extends JsonResource
             'title' => $this->title,
             'contents' => $this->contents,
             'hit' => $this->hit,
+            'created_at' => $this->created_at,
         ];
     }
 }
