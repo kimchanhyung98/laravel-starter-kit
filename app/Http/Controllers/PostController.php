@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\Post\EditResource;
 use App\Http\Resources\Post\IndexResource;
 use App\Http\Resources\Post\MessageResource;
 use App\Http\Resources\Post\ShowResource;
-use App\Http\Resources\Post\EditResource;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class PostController extends Controller
 {
@@ -45,18 +46,14 @@ class PostController extends Controller
 
     public function edit(Post $post): EditResource
     {
-        if ($post->user_id !== Auth::id()) {
-            abort(403, '게시글 작성자만 수정할 수 있습니다.');
-        }
+        Gate::authorize('update', $post);
 
         return new EditResource($post);
     }
 
     public function update(Request $request, Post $post): MessageResource
     {
-        if ($post->user_id !== Auth::id()) {
-            abort(403, '게시글 작성자만 수정할 수 있습니다.');
-        }
+        Gate::authorize('update', $post);
 
         $post->update([
             'type' => $request->type ?? null,
@@ -73,10 +70,7 @@ class PostController extends Controller
 
     public function destroy(Post $post): MessageResource
     {
-        if ($post->user_id !== Auth::id()) {
-            abort(403, '게시글 작성자만 삭제할 수 있습니다.');
-        }
-
+        Gate::authorize('delete', $post);
         $post->delete();
 
         return new MessageResource([
