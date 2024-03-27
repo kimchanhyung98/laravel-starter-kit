@@ -14,6 +14,7 @@ class EditResource extends JsonResource
             'type' => $this->type,
             'title' => $this->title,
             'contents' => $this->contents,
+            'is_open' => $this->is_open,
         ];
     }
 }
