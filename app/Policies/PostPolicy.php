@@ -39,7 +39,7 @@ class PostPolicy
     {
         return $user->id === $post->user_id
             ? Response::allow()
-            : Response::deny('게시글 작성자만 수정할 수 있습니다.');
+            : Response::deny(__('post.update_denied'));
     }
 
     /**
@@ -49,6 +49,6 @@ class PostPolicy
     {
         return $user->id === $post->user_id
             ? Response::allow()
-            : Response::deny('게시글 작성자만 삭제할 수 있습니다.');
+            : Response::deny(__('post.destroy_denied'));
     }
 }
