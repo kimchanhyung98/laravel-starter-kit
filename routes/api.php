@@ -44,9 +44,8 @@ Route::group(['prefix' => 'posts', 'controller' => PostController::class], stati
 
     Route::middleware('auth:sanctum')->group(static function () {
         Route::post('/', 'store');
-
         Route::prefix('{post}')->group(static function () {
-            Route::get('/', 'edit');
+            Route::get('edit', 'edit');
             Route::put('/', 'update');
             Route::delete('/', 'destroy');
         });
