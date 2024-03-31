@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ErrorController;
 use App\Http\Controllers\HealthCheckController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,8 +15,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('health-check', HealthCheckController::class);
-
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('health-check', HealthCheckController::class);
+Route::get('errors/{code}', ErrorController::class);
