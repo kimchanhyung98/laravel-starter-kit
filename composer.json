@@ -15,6 +15,7 @@
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.3",
+        "laravel/scout": "^10.8",
         "laravel/socialite": "^5.9",
         "laravel/tinker": "^2.8",
         "league/flysystem-aws-s3-v3": "^3.16",
