@@ -18,6 +18,7 @@ class IndexResource extends JsonResource
             'type' => $this->type,
             'title' => $this->title,
             'hit' => $this->hit,
+            'created_at' => $this->created_at,
         ];
     }
 }

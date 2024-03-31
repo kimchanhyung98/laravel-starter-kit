@@ -13,8 +13,8 @@ class PostFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => User::factory(),
-            'type' => fake()->randomElement(['notice', 'faq']),
+            'user_id' => User::inRandomOrder()->first()->id,
+            'type' => fake()->randomElement([null, 'notice', 'faq']),
             'title' => fake()->sentence,
             'contents' => fake()->paragraph,
             'hit' => fake()->numberBetween(0, 1000),
