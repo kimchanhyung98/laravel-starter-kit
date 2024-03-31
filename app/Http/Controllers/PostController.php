@@ -21,6 +21,13 @@ class PostController extends Controller
         );
     }
 
+    public function search(Request $request): AnonymousResourceCollection
+    {
+        return IndexResource::collection(
+            Post::search($request->q)->paginate(10)
+        );
+    }
+
     public function store(Request $request): MessageResource
     {
         $post = Post::create([
@@ -30,6 +37,7 @@ class PostController extends Controller
             'contents' => $request->contents,
             'is_open' => $request->is_open ?? false,
         ]);
+        $post->searchable();
 
         return new MessageResource([
             'id' => $post->id,
