@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\Post\EditResource;
 use App\Http\Resources\Post\IndexResource;
 use App\Http\Resources\Post\MessageResource;
 use App\Http\Resources\Post\ShowResource;
@@ -9,6 +10,7 @@ use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class PostController extends Controller
 {
@@ -31,7 +33,7 @@ class PostController extends Controller
 
         return new MessageResource([
             'id' => $post->id,
-            'message' => '게시글이 등록되었습니다.',
+            'message' => __('post.store'),
         ]);
     }
 
@@ -42,11 +44,16 @@ class PostController extends Controller
         return new ShowResource($post);
     }
 
+    public function edit(Post $post): EditResource
+    {
+        Gate::authorize('update', $post);
+
+        return new EditResource($post);
+    }
+
     public function update(Request $request, Post $post): MessageResource
     {
-        if ($post->user_id !== Auth::id()) {
-            abort(403, '게시글 작성자만 수정할 수 있습니다.');
-        }
+        Gate::authorize('update', $post);
 
         $post->update([
             'type' => $request->type ?? null,
@@ -57,21 +64,18 @@ class PostController extends Controller
 
         return new MessageResource([
             'id' => $post->id,
-            'message' => '게시글이 수정되었습니다.',
+            'message' => __('post.update'),
         ]);
     }
 
     public function destroy(Post $post): MessageResource
     {
-        if ($post->user_id !== Auth::id()) {
-            abort(403, '게시글 작성자만 삭제할 수 있습니다.');
-        }
-
+        Gate::authorize('delete', $post);
         $post->delete();
 
         return new MessageResource([
             'id' => 0,
-            'message' => '게시글이 삭제되었습니다.',
+            'message' => __('post.destroy'),
         ]);
     }
 }
