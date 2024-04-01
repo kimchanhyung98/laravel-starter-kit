@@ -13,7 +13,7 @@ class IndexResource extends JsonResource
             'id' => $this->id,
             'user' => [
                 'id' => $this->user->id,
-                'name' => $this->user->name,
+                'name' => $this->user->nickname,
             ],
             'type' => $this->type,
             'title' => $this->title,
