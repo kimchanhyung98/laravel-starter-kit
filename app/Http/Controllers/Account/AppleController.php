@@ -17,12 +17,6 @@ class AppleController extends Controller
 {
     public const string PROVIDER = 'apple';
 
-    private function __construct(
-        public Configuration $jwtConfig
-    ) {
-        // construct
-    }
-
     /**
      * SocialLogin (Apple)
      *
@@ -73,16 +67,18 @@ class AppleController extends Controller
      */
     private function getToken($redirectUri): void
     {
+        $jwtConfig = app(Configuration::class);
+
         config()->set('services.apple.redirect', $redirectUri);
         $now = CarbonImmutable::now();
-        $token = $this->jwtConfig->builder()
+        $token = $jwtConfig->builder()
             ->issuedBy(config('services.apple.team_id'))
             ->issuedAt($now)
             ->expiresAt($now->addHour())
             ->permittedFor('https://appleid.apple.com')
             ->relatedTo(config('services.apple.client_id'))
             ->withHeader('kid', config('services.apple.key_id'))
-            ->getToken($this->jwtConfig->signer(), $this->jwtConfig->signingKey());
+            ->getToken($jwtConfig->signer(), $jwtConfig->signingKey());
 
         config()->set('services.apple.client_secret', $token->toString());
     }

@@ -15,4 +15,10 @@ brew install php@8.3 composer
 composer install
 sail up # or ./vendor/bin/sail up 
 sail artisan migrate --seed
+sail artisan scout:import "App\Models\Post"
 ```
+
+## OpenAPI
+
+Scramble - Laravel OpenAPI(Swagger) Generator 를 사용하여 API 문서를 확인할 수 있습니다.
+- localhost/docs/api

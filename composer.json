@@ -11,10 +11,12 @@
     "license": "MIT",
     "require": {
         "php": "^8.3",
+        "algolia/algoliasearch-client-php": "^3.4",
         "doctrine/dbal": "^3.7",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.3",
+        "laravel/scout": "^10.8",
         "laravel/socialite": "^5.9",
         "laravel/tinker": "^2.8",
         "league/flysystem-aws-s3-v3": "^3.16",
@@ -24,6 +26,7 @@
     },
     "require-dev": {
         "beyondcode/laravel-query-detector": "^1.7",
+        "dedoc/scramble": "^0.8",
         "fakerphp/faker": "^1.9.1",
         "kimchanhyung98/laravel-maker": "^0.1.0",
         "larastan/larastan": "^2.8",
