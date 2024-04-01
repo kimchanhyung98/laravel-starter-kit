@@ -15,4 +15,5 @@ brew install php@8.3 composer
 composer install
 sail up # or ./vendor/bin/sail up 
 sail artisan migrate --seed
+sail artisan scout:import "App\Models\Post"
 ```

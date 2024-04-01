@@ -40,7 +40,6 @@ Route::prefix('accounts')->group(static function () {
 // Board
 Route::group(['prefix' => 'posts', 'controller' => PostController::class], static function () {
     Route::get('/', 'index');
-    Route::get('search', 'search');
     Route::get('{post}', 'show');
 
     Route::middleware('auth:sanctum')->group(static function () {
