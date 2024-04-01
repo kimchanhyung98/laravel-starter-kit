@@ -26,6 +26,7 @@
     },
     "require-dev": {
         "beyondcode/laravel-query-detector": "^1.7",
+        "dedoc/scramble": "^0.8",
         "fakerphp/faker": "^1.9.1",
         "kimchanhyung98/laravel-maker": "^0.1.0",
         "larastan/larastan": "^2.8",
