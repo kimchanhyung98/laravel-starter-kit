@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('posts', static function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
-            $table->enum('type', ['notice', 'faq'])->nullable();
+            $table->enum('type', ['free', 'notice', 'faq'])->nullable();
             $table->string('title', 200);
             $table->longText('contents');
             $table->unsignedInteger('hit')->default(0);

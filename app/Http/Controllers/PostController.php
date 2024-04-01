@@ -14,10 +14,17 @@ use Illuminate\Support\Facades\Gate;
 
 class PostController extends Controller
 {
-    public function index(): AnonymousResourceCollection
+    public function index(Request $request): AnonymousResourceCollection
     {
         return IndexResource::collection(
-            Post::with('user')->paginate(10)
+            Post::search($request->q)
+            // ->when($request->type, fn ($query, $type) => $query->where('type', $type))
+            // ->query(fn (Builder $query) => $query->with('user:id,nickname'))
+                ->when($request->type, function ($query, $type) {
+                    return $query->where('type', $type);
+                })->query(function ($query) {
+                    return $query->with('user:id,nickname');
+                })->paginate(10)
         );
     }
 
@@ -30,6 +37,7 @@ class PostController extends Controller
             'contents' => $request->contents,
             'is_open' => $request->is_open ?? false,
         ]);
+        $post->searchable();
 
         return new MessageResource([
             'id' => $post->id,
