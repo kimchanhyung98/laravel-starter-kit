@@ -14,7 +14,7 @@ class PostFactory extends Factory
     {
         return [
             'user_id' => User::inRandomOrder()->first()->id,
-            'type' => fake()->randomElement([null, 'notice', 'faq']),
+            'type' => fake()->randomElement(['free', 'notice', 'faq']),
             'title' => fake()->sentence,
             'contents' => fake()->text,
             'hit' => fake()->numberBetween(0, 1000),
