@@ -11,6 +11,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 
 class PostController extends Controller
@@ -32,6 +33,7 @@ class PostController extends Controller
     public function store(Request $request): MessageResource
     {
         try {
+            DB::beginTransaction();
             $post = Post::create([
                 'user_id' => Auth::id(),
                 'type' => $request->type ?? null,
@@ -39,8 +41,11 @@ class PostController extends Controller
                 'contents' => $request->contents,
                 'is_open' => $request->is_open ?? false,
             ]);
+            DB::commit();
+
             $post->searchable();
         } catch (Exception $e) {
+            DB::rollBack();
             logger($e->getMessage());
             abort(500);
         }
@@ -74,14 +79,18 @@ class PostController extends Controller
         Gate::authorize('update', $post);
 
         try {
+            DB::beginTransaction();
             $post->update([
                 'type' => $request->type,
                 'title' => $request->title,
                 'contents' => $request->contents,
                 'is_open' => $request->is_open,
             ]);
+            DB::commit();
+
             $post->searchable();
         } catch (Exception $e) {
+            DB::rollBack();
             logger($e->getMessage());
             abort(500);
         }
@@ -98,6 +107,7 @@ class PostController extends Controller
 
         try {
             $post->delete();
+
             $post->unsearchable();
         } catch (Exception $e) {
             logger($e->getMessage());
