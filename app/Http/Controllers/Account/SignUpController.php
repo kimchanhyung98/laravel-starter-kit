@@ -19,13 +19,13 @@ class SignUpController extends Controller
      */
     public function __invoke(SignUpRequest $request)
     {
-        DB::beginTransaction();
         try {
+            DB::beginTransaction();
             $user = User::firstOrCreate([
                 'email' => $request->email,
             ], [
                 'name' => $request->name,
-                'nickname' => $request->nickname ?? $request->name,
+                'nickname' => $request->nickname,
                 'password' => Hash::make($request->password),
             ]);
 
@@ -33,7 +33,6 @@ class SignUpController extends Controller
                 abort(409, 'already exists');
             }
             // $user->sendEmailVerificationNotification();
-
             DB::commit();
         } catch (Exception $e) {
             DB::rollBack();
