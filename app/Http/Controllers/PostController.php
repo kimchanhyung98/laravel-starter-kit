@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Post\IndexRequest;
+use App\Http\Requests\Post\StoreRequest;
+use App\Http\Requests\Post\UpdateRequest;
 use App\Http\Resources\Post\EditResource;
 use App\Http\Resources\Post\IndexResource;
 use App\Http\Resources\Post\MessageResource;
 use App\Http\Resources\Post\ShowResource;
 use App\Models\Post;
 use Exception;
-use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -16,7 +18,7 @@ use Illuminate\Support\Facades\Gate;
 
 class PostController extends Controller
 {
-    public function index(Request $request): AnonymousResourceCollection
+    public function index(IndexRequest $request): AnonymousResourceCollection
     {
         return IndexResource::collection(
             Post::search($request->q)
@@ -30,13 +32,13 @@ class PostController extends Controller
         );
     }
 
-    public function store(Request $request): MessageResource
+    public function store(StoreRequest $request): MessageResource
     {
         try {
             DB::beginTransaction();
             $post = Post::create([
                 'user_id' => Auth::id(),
-                'type' => $request->type ?? null,
+                'type' => $request->type ?? 'free',
                 'title' => $request->title,
                 'contents' => $request->contents,
                 'is_open' => $request->is_open ?? false,
@@ -74,7 +76,7 @@ class PostController extends Controller
         return new EditResource($post);
     }
 
-    public function update(Request $request, Post $post): MessageResource
+    public function update(UpdateRequest $request, Post $post): MessageResource
     {
         Gate::authorize('update', $post);
 
