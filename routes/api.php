@@ -6,6 +6,8 @@ use App\Http\Controllers\Account\SignInController;
 use App\Http\Controllers\Account\SignUpController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\User\UserDestroyController;
+use App\Http\Controllers\User\UserUpdateController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,8 +34,8 @@ Route::prefix('accounts')->group(static function () {
 
     Route::middleware('auth:sanctum')->group(static function () {
         Route::get('/', UserController::class);
-        // Route::put('/', UserUpdateController::class);
-        // Route::delete('/', UserDeleteController::class);
+        Route::put('/', UserUpdateController::class);
+        Route::delete('/', UserDestroyController::class);
     });
 });
 
