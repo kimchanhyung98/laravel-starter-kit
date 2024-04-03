@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Post\IndexRequest;
 use App\Http\Requests\Post\StoreRequest;
 use App\Http\Requests\Post\UpdateRequest;
+use App\Http\Resources\MessageResource;
 use App\Http\Resources\Post\EditResource;
 use App\Http\Resources\Post\IndexResource;
-use App\Http\Resources\Post\MessageResource;
 use App\Http\Resources\Post\ShowResource;
 use App\Models\Post;
 use Exception;
@@ -117,7 +117,6 @@ class PostController extends Controller
         }
 
         return new MessageResource([
-            'id' => 0,
             'message' => __('post.destroy'),
         ]);
     }
