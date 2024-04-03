@@ -30,7 +30,7 @@ class SignUpController extends Controller
             ]);
 
             if (! $user->wasRecentlyCreated) {
-                abort(409, 'already exists');
+                abort(409, __('user.signup_duplicate_email'));
             }
             // $user->sendEmailVerificationNotification();
             DB::commit();
