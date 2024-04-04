@@ -13,27 +13,24 @@ use Illuminate\Support\Facades\Hash;
 class SignUpController extends Controller
 {
     /**
-     * Sign up
-     *
-     * @return AccessTokenResource
+     * 회원 가입
      */
-    public function __invoke(SignUpRequest $request)
+    public function __invoke(SignUpRequest $request): AccessTokenResource
     {
-        DB::beginTransaction();
         try {
+            DB::beginTransaction();
             $user = User::firstOrCreate([
                 'email' => $request->email,
             ], [
                 'name' => $request->name,
-                'nickname' => $request->nickname ?? $request->name,
+                'nickname' => $request->nickname,
                 'password' => Hash::make($request->password),
             ]);
 
             if (! $user->wasRecentlyCreated) {
-                abort(409, 'already exists');
+                abort(409, __('user.signup_duplicate_email'));
             }
             // $user->sendEmailVerificationNotification();
-
             DB::commit();
         } catch (Exception $e) {
             DB::rollBack();

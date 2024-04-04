@@ -16,11 +16,9 @@ class KakaoController extends Controller
     public const string PROVIDER = 'kakao';
 
     /**
-     * SocialLogin (Kakao)
-     *
-     * @return AccessTokenResource
+     * 소셜로그인 (카카오)
      */
-    public function __invoke(Request $request)
+    public function __invoke(Request $request): AccessTokenResource
     {
         DB::beginTransaction();
         try {

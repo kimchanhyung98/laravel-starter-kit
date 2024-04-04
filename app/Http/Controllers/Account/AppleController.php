@@ -18,11 +18,9 @@ class AppleController extends Controller
     public const string PROVIDER = 'apple';
 
     /**
-     * SocialLogin (Apple)
-     *
-     * @return AccessTokenResource
+     * 소셜로그인 (애플)
      */
-    public function __invoke(Request $request)
+    public function __invoke(Request $request): AccessTokenResource
     {
         $this->getToken($request->redirect_uri);
 
