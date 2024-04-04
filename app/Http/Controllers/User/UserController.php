@@ -8,7 +8,10 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-    public function __invoke()
+    /**
+     * 회원 정보 확인
+     */
+    public function __invoke(): UserResource
     {
         return new UserResource(Auth::user());
     }

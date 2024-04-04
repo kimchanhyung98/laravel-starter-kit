@@ -12,11 +12,9 @@ use Illuminate\Support\Facades\Hash;
 class SignInController extends Controller
 {
     /**
-     * Sign in
-     *
-     * @return AccessTokenResource
+     * 로그인
      */
-    public function __invoke(SignInRequest $request)
+    public function __invoke(SignInRequest $request): AccessTokenResource
     {
         try {
             $user = User::where('email', $request->email)->firstOrFail();
@@ -26,7 +24,7 @@ class SignInController extends Controller
             }
         } catch (Exception $e) {
             logger($e);
-            abort(401, 'invalid credentials');
+            abort(401, __('user.signin_denied'));
         }
 
         return new AccessTokenResource(

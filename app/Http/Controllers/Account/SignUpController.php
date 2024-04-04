@@ -13,11 +13,9 @@ use Illuminate\Support\Facades\Hash;
 class SignUpController extends Controller
 {
     /**
-     * Sign up
-     *
-     * @return AccessTokenResource
+     * 회원 가입
      */
-    public function __invoke(SignUpRequest $request)
+    public function __invoke(SignUpRequest $request): AccessTokenResource
     {
         try {
             DB::beginTransaction();
