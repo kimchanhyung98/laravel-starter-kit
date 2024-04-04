@@ -27,6 +27,7 @@ return new class extends Migration
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
+            $table->string('deleted_reason', 200)->nullable();
         });
     }
 
