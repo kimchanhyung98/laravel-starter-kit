@@ -4724,22 +4724,22 @@
         },
         {
             "name": "socialiteproviders/kakao",
-            "version": "4.2.2",
+            "version": "4.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/SocialiteProviders/Kakao.git",
-                "reference": "0f1210fc3b82fe4f489388cb5d730351797281ac"
+                "reference": "d962a66bc2930f8a1b7455a6af6c65a7165d6247"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/SocialiteProviders/Kakao/zipball/0f1210fc3b82fe4f489388cb5d730351797281ac",
-                "reference": "0f1210fc3b82fe4f489388cb5d730351797281ac",
+                "url": "https://api.github.com/repos/SocialiteProviders/Kakao/zipball/d962a66bc2930f8a1b7455a6af6c65a7165d6247",
+                "reference": "d962a66bc2930f8a1b7455a6af6c65a7165d6247",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
-                "php": "^7.2 || ^8.0",
-                "socialiteproviders/manager": "~4.0"
+                "php": "^8.0",
+                "socialiteproviders/manager": "^4.4"
             },
             "type": "library",
             "autoload": {
@@ -4758,10 +4758,19 @@
                 }
             ],
             "description": "Kakao OAuth2 Provider for Laravel Socialite",
+            "keywords": [
+                "kakao",
+                "laravel",
+                "oauth",
+                "provider",
+                "socialite"
+            ],
             "support": {
-                "source": "https://github.com/SocialiteProviders/Kakao/tree/4.2.2"
+                "docs": "https://socialiteproviders.com/kakao",
+                "issues": "https://github.com/socialiteproviders/providers/issues",
+                "source": "https://github.com/socialiteproviders/providers"
             },
-            "time": "2021-02-24T22:47:43+00:00"
+            "time": "2024-04-01T23:43:29+00:00"
         },
         {
             "name": "socialiteproviders/manager",
