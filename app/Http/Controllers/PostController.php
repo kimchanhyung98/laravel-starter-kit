@@ -60,6 +60,8 @@ class PostController extends Controller
 
     public function show(Post $post): ShowResource
     {
+        Gate::authorize('view', $post);
+
         try {
             $post->increment('hit');
         } catch (Exception $e) {
