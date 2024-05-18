@@ -3,10 +3,10 @@
 필요한 최소한의 기능을 구현해놓은 템플릿입니다.  
 [Sail](https://laravel.com/docs/10.x/sail)을 사용하여 실행할 수 있습니다.
 
-- PHP 8.3 & Laravel 10
+- PHP 8.3 & Laravel 11
 - Redis
 - AWS ECR, EB, S3
-- (Next.js 14)
+- [next-starter-kit](https://github.com/LeeByeongMuk/next-starter-kit)
 
 ## Install
 
