@@ -2,25 +2,19 @@
 
 namespace App\Models;
 
-use App\Models\Scopes\ViewablePostScope;
-use Illuminate\Database\Eloquent\Attributes\ScopedBy;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Scout\Searchable;
 
-#[ScopedBy(ViewablePostScope::class)]
 class Post extends Model
 {
     use HasFactory, Searchable, SoftDeletes;
 
     protected $fillable = [
-        'user_id',
-        'type',
-        'title',
-        'contents',
-        'is_open',
+        'user_id', 'type', 'title', 'contents', 'is_open',
     ];
 
     protected $hidden = [
@@ -41,6 +35,11 @@ class Post extends Model
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class)->withTrashed();
+    }
+
+    public function scopeOpen(Builder $query): void
+    {
+        $query->where('is_open', true);
     }
 }

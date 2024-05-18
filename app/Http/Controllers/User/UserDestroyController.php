@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\User\UserDestroyRequest;
 use App\Http\Resources\MessageResource;
 use Exception;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -14,7 +14,7 @@ class UserDestroyController extends Controller
     /**
      * 회원 탈퇴
      */
-    public function __invoke(Request $request): MessageResource
+    public function __invoke(UserDestroyRequest $request): MessageResource
     {
         $user = Auth::user();
         if (! $user) {

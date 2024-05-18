@@ -10,19 +10,14 @@ use App\Http\Controllers\User\UserDestroyController;
 use App\Http\Controllers\User\UserUpdateController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "api" middleware group. Make something great!
-|
-*/
-
 // Account
 Route::prefix('accounts')->group(static function () {
+    Route::middleware('auth:sanctum')->group(static function () {
+        Route::get('/', UserController::class);
+        Route::put('/', UserUpdateController::class);
+        Route::post('delete', UserDestroyController::class);
+    });
+
     Route::post('signup', SignUpController::class);
     // Route::get('verify', VerifyController::class);
 
@@ -30,12 +25,6 @@ Route::prefix('accounts')->group(static function () {
         Route::post('/', SignInController::class);
         Route::post('apple', AppleController::class);
         Route::post('kakao', KakaoController::class);
-    });
-
-    Route::middleware('auth:sanctum')->group(static function () {
-        Route::get('/', UserController::class);
-        Route::put('/', UserUpdateController::class);
-        Route::delete('/', UserDestroyController::class);
     });
 });
 

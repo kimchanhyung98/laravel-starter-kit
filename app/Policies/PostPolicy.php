@@ -5,6 +5,7 @@ namespace App\Policies;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
+use Illuminate\Support\Facades\Auth;
 
 class PostPolicy
 {
@@ -19,9 +20,16 @@ class PostPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Post $post): bool
+    public function view(?User $_, Post $post): Response
     {
-        return true;
+        if (! $post->is_open) {
+            $user = Auth::guard('sanctum')->user();
+            if ($post->user_id !== $user?->id) {
+                return Response::deny(__('post.view_denied'));
+            }
+        }
+
+        return Response::allow();
     }
 
     /**

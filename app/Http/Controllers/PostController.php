@@ -27,7 +27,7 @@ class PostController extends Controller
                 ->when($request->type, function ($query, $type) {
                     return $query->where('type', $type);
                 })->query(function ($query) {
-                    return $query->with('user:id,nickname');
+                    return $query->open()->with('user:id,nickname');
                 })->paginate(10)
         );
     }
@@ -60,6 +60,8 @@ class PostController extends Controller
 
     public function show(Post $post): ShowResource
     {
+        Gate::authorize('view', $post);
+
         try {
             $post->increment('hit');
         } catch (Exception $e) {
