@@ -1,13 +1,14 @@
 name: run-tests
 
 on:
+  pull_request:
+    branches:
+      - main
+      - develop
   push:
-    paths:
-      - '**.php'
-      - '.github/workflows/run-tests.yml'
-      - 'phpunit.xml.dist'
-      - 'composer.json'
-      - 'composer.lock'
+    branches:
+      - main
+      - develop
 
 jobs:
   test:
@@ -16,14 +17,12 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        os: [ubuntu-latest, windows-latest]
-        php: [8.3] # [8.2, 8.3]
-        laravel: [10.*] # [10.*, 11.*]
-        stability: [prefer-lowest, prefer-stable]
+        os: [ ubuntu-latest, windows-latest ]
+        php: [ 8.3 ]
+        laravel: [ 11.* ]
+        stability: [ prefer-lowest, prefer-stable ]
         include:
-          - laravel: 10.*
-            testbench: 8.*
-            carbon: ^2.63
+          - laravel: 11.*
 
     name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
 
@@ -38,18 +37,16 @@ jobs:
           extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick, fileinfo
           coverage: none
 
-      - name: Setup problem matchers
+      - name: Install composer dependencies
+        run: composer install -n --prefer-dist
+
+      - name: Prepare Laravel Application
         run: |
-          echo "::add-matcher::${{ runner.tool_cache }}/php.json"
-          echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
+          cp .env.testing .env
+          php artisan key:generate
 
-      - name: Install dependencies
-        run: |
-          composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" "nesbot/carbon:${{ matrix.carbon }}" --no-interaction --no-update
-          composer update --${{ matrix.stability }} --prefer-dist --no-interaction
+      - name: Run tests
+        run: php artisan test
 
-      - name: List Installed Dependencies
-        run: composer show -D
-
-      - name: Execute tests
-        run: vendor/bin/pest --ci
+      # - name: Run Static Analysis
+      #   run: ./vendor/bin/phpstan analyse --memory-limit=2G --error-format=github
