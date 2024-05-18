@@ -6,20 +6,18 @@
 /storage/*.key
 /storage/clockwork
 /vendor
+.phpactor.json
 .phpunit.result.cache
 Homestead.json
 Homestead.yaml
-docker-compose.override.yml
 auth.json
 *.log
 *.sql
 
 # Environment
 .env
-.env.testing
 .env.backup
 .env.production
-.env.development
 
 # IDE
 /.fleet

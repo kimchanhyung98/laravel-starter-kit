@@ -11,6 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
+        Schema::create('user_apples', static function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('user_id')->constrained();
+            $table->string('name', 100)->nullable();
+            $table->string('email', 200)->nullable();
+            $table->string('sub', 200)->comment('user unique id');
+            $table->string('at_hash', 200)->nullable()->comment('access_token hash');
+            $table->text('token')->nullable();
+            $table->timestamps();
+            $table->softDeletes();
+        });
+
         Schema::create('user_kakaos', static function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
@@ -33,6 +45,7 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::dropIfExists('user_apples');
         Schema::dropIfExists('user_kakaos');
     }
 };

@@ -12,33 +12,28 @@
     "require": {
         "php": "^8.3",
         "algolia/algoliasearch-client-php": "^3.4",
-        "doctrine/dbal": "^3.7",
-        "guzzlehttp/guzzle": "^7.2",
-        "laravel/framework": "^10.10",
-        "laravel/sanctum": "^3.3",
-        "laravel/scout": "^10.8",
-        "laravel/socialite": "^5.9",
-        "laravel/tinker": "^2.8",
-        "league/flysystem-aws-s3-v3": "^3.16",
+        "laravel/framework": "^11.0",
+        "laravel/sanctum": "^4.0",
+        "laravel/scout": "^10.9",
+        "laravel/socialite": "^5.14",
+        "laravel/tinker": "^2.9",
+        "league/flysystem-aws-s3-v3": "^3.27",
         "predis/predis": "^2.2",
         "socialiteproviders/apple": "^5.6",
-        "socialiteproviders/kakao": "^4.2"
+        "socialiteproviders/kakao": "^4.3"
     },
     "require-dev": {
-        "beyondcode/laravel-query-detector": "^1.7",
-        "dedoc/scramble": "^0.8",
-        "fakerphp/faker": "^1.9.1",
-        "kimchanhyung98/laravel-maker": "^0.1.0",
-        "larastan/larastan": "^2.8",
-        "laravel/pint": "^1.0",
-        "laravel/sail": "^1.18",
-        "mockery/mockery": "^1.4.4",
-        "nunomaduro/collision": "^7.0",
-        "phpunit/phpunit": "^10.1",
-        "psalm/plugin-laravel": "^2.8",
+        "dedoc/scramble": "^0.10.4",
+        "fakerphp/faker": "^1.23",
+        "larastan/larastan": "^2.0",
+        "laravel/pint": "^1.13",
+        "laravel/sail": "^1.26",
+        "mockery/mockery": "^1.6",
+        "nunomaduro/collision": "^8.0",
+        "phpunit/phpunit": "^11.0.1",
         "roave/security-advisories": "dev-latest",
-        "spatie/laravel-ignition": "^2.0",
-        "zircote/swagger-php": "^4.7"
+        "spatie/laravel-ignition": "^2.4",
+        "zircote/swagger-php": "^4.9"
     },
     "autoload": {
         "psr-4": {
@@ -57,17 +52,18 @@
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"
         ],
-        "post-create-project-cmd": [
-            "@php artisan key:generate --ansi"
+        "post-update-cmd": [
+            "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
         ],
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
         ],
-        "post-update-cmd": [
-            "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
+        "post-create-project-cmd": [
+            "@php artisan key:generate --ansi",
+            "@php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\"",
+            "@php artisan migrate --graceful --ansi"
         ],
         "format": "./vendor/bin/pint --preset laravel",
-        "salm": "./vendor/bin/psalm",
         "stan" : "./vendor/bin/phpstan analyse --memory-limit=2G",
         "swagger": "./vendor/bin/openapi app -o openapi.yaml -b swagger-config.php"
     },
