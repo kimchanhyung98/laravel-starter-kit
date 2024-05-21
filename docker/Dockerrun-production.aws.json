@@ -1,0 +1,13 @@
+{
+    "AWSEBDockerrunVersion": "1",
+    "Image": {
+        "Name": "1234567890.dkr.ecr.ap-northeast-2.amazonaws.com/laravel-production:latest",
+        "Update": "true"
+    },
+    "Ports": [
+        {
+            "ContainerPort": "80",
+            "HostPort": "80"
+        }
+    ]
+}
