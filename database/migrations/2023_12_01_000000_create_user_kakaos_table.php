@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('nickname', 50)->nullable();
             $table->string('avatar', 200)->nullable()->comment('profile image path');
             $table->string('gender', 20)->nullable();
-            $table->integer('birthday')->nullable();
+            $table->string('birthday')->nullable();
             $table->string('calendar', 20)->nullable();
             $table->string('age_range', 20)->nullable();
             $table->string('sub', 200)->comment('user unique id');
