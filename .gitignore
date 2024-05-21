@@ -1,0 +1,40 @@
+/.phpunit.cache
+/node_modules
+/public/build
+/public/hot
+/public/storage
+/storage/*.key
+/storage/clockwork
+/vendor
+.phpunit.result.cache
+Homestead.json
+Homestead.yaml
+docker-compose.override.yml
+auth.json
+*.log
+*.sql
+
+# Environment
+.env
+.env.testing
+.env.backup
+.env.production
+.env.development
+
+# IDE
+/.fleet
+/.idea
+/.vscode
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# etc
+.DS_Store
+.DS_Store?
+.Trashes
+ehthumbs.db
+Thumbs.db
