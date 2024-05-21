@@ -22,3 +22,4 @@ sail artisan scout:import "App\Models\Post"
 
 Scramble - Laravel OpenAPI(Swagger) Generator 를 사용하여 API 문서를 확인할 수 있습니다.
 - localhost/docs/api
+
