@@ -13,12 +13,20 @@ class PostFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => User::inRandomOrder()->first()->id,
+            'user_id' => User::factory(),
             'type' => fake()->randomElement(['free', 'notice', 'faq']),
             'title' => fake()->sentence,
             'contents' => fake()->text,
             'hit' => fake()->numberBetween(0, 1000),
             'is_open' => fake()->boolean,
         ];
+    }
+
+    public function free(): PostFactory
+    {
+        return $this->state([
+            'type' => 'free',
+            'is_open' => true,
+        ]);
     }
 }
