@@ -13,8 +13,6 @@ use Laravel\Socialite\Facades\Socialite;
 
 class KakaoController extends Controller
 {
-    public const string PROVIDER = 'kakao';
-
     /**
      * 소셜로그인 (카카오)
      */
@@ -23,11 +21,11 @@ class KakaoController extends Controller
         DB::beginTransaction();
         try {
             // config()->set('services.kakao.redirect', $request->redirect_uri);
-            $token = Socialite::driver(self::PROVIDER)->getAccessTokenResponse($request->code)['access_token'];
-            $socialUser = Socialite::driver(self::PROVIDER)->userFromToken($token);
+            $token = Socialite::driver('kakao')->getAccessTokenResponse($request->code)['access_token'];
+            $socialUser = Socialite::driver('kakao')->userFromToken($token);
 
             $user = User::firstOrCreate([
-                'provider' => self::PROVIDER,
+                'provider' => 'kakao',
                 'provider_id' => $socialUser->getId(),
             ], [
                 'name' => $socialUser->getName(),
@@ -58,7 +56,7 @@ class KakaoController extends Controller
         }
 
         return new AccessTokenResource(
-            $user->createToken(self::PROVIDER)->plainTextToken
+            $user->createToken('kakao')->plainTextToken
         );
     }
 }

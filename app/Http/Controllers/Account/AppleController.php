@@ -15,8 +15,6 @@ use Lcobucci\JWT\Configuration;
 
 class AppleController extends Controller
 {
-    public const string PROVIDER = 'apple';
-
     /**
      * 소셜로그인 (애플)
      */
@@ -26,11 +24,11 @@ class AppleController extends Controller
 
         DB::beginTransaction();
         try {
-            $token = Socialite::driver(self::PROVIDER)->getAccessTokenResponse($request->code);
-            $socialUser = Socialite::driver(self::PROVIDER)->userFromToken($token['id_token']);
+            $token = Socialite::driver('apple')->getAccessTokenResponse($request->code);
+            $socialUser = Socialite::driver('apple')->userFromToken($token['id_token']);
 
             $user = User::firstOrCreate([
-                'provider' => self::PROVIDER,
+                'provider' => 'apple',
                 'provider_id' => $socialUser->getId(),
             ], [
                 'name' => $socialUser->getName(),
@@ -56,7 +54,7 @@ class AppleController extends Controller
         }
 
         return new AccessTokenResource(
-            $user->createToken(self::PROVIDER)->plainTextToken
+            $user->createToken('apple')->plainTextToken
         );
     }
 
