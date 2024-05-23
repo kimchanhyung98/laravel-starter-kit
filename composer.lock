@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c3bce09600c648c596a33e26d68b4de8",
+    "content-hash": "481dce2946cf93bb5e8a0e14854b8210",
     "packages": [
         {
             "name": "algolia/algoliasearch-client-php",
@@ -6997,16 +6997,16 @@
     "packages-dev": [
         {
             "name": "dedoc/scramble",
-            "version": "v0.10.10",
+            "version": "v0.10.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dedoc/scramble.git",
-                "reference": "dbbf57bc855e5d56822e1f45de01719eace24606"
+                "reference": "24a27c9365cd95d9096e4aa75664cebf82263e42"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dedoc/scramble/zipball/dbbf57bc855e5d56822e1f45de01719eace24606",
-                "reference": "dbbf57bc855e5d56822e1f45de01719eace24606",
+                "url": "https://api.github.com/repos/dedoc/scramble/zipball/24a27c9365cd95d9096e4aa75664cebf82263e42",
+                "reference": "24a27c9365cd95d9096e4aa75664cebf82263e42",
                 "shasum": ""
             },
             "require": {
@@ -7059,7 +7059,7 @@
             ],
             "support": {
                 "issues": "https://github.com/dedoc/scramble/issues",
-                "source": "https://github.com/dedoc/scramble/tree/v0.10.10"
+                "source": "https://github.com/dedoc/scramble/tree/v0.10.11"
             },
             "funding": [
                 {
@@ -7067,7 +7067,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-05-22T06:25:52+00:00"
+            "time": "2024-05-23T11:28:36+00:00"
         },
         {
             "name": "fakerphp/faker",
@@ -8533,12 +8533,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "7a1a6552ac2f0fd7131d2552be221f2dd6eb19fa"
+                "reference": "0ec6bad5f4523eda2514e89d5ea48cde6ebe7f99"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/7a1a6552ac2f0fd7131d2552be221f2dd6eb19fa",
-                "reference": "7a1a6552ac2f0fd7131d2552be221f2dd6eb19fa",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/0ec6bad5f4523eda2514e89d5ea48cde6ebe7f99",
+                "reference": "0ec6bad5f4523eda2514e89d5ea48cde6ebe7f99",
                 "shasum": ""
             },
             "conflict": {
@@ -9202,6 +9202,7 @@
                 "villagedefrance/opencart-overclocked": "<=1.11.1",
                 "vova07/yii2-fileapi-widget": "<0.1.9",
                 "vrana/adminer": "<4.8.1",
+                "vufind/vufind": ">=2,<9.1.1",
                 "waldhacker/hcaptcha": "<2.1.2",
                 "wallabag/tcpdf": "<6.2.22",
                 "wallabag/wallabag": "<2.6.7",
@@ -9322,7 +9323,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-05-20T21:04:23+00:00"
+            "time": "2024-05-23T15:04:32+00:00"
         },
         {
             "name": "sebastian/cli-parser",
@@ -10825,7 +10826,7 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "^8.3"
+        "php": "^8.2"
     },
     "platform-dev": [],
     "plugin-api-version": "2.3.0"
