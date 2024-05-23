@@ -25,6 +25,7 @@
     "require-dev": {
         "dedoc/scramble": "^0.10.4",
         "fakerphp/faker": "^1.23",
+        "kimchanhyung98/laravel-maker": "^0.1.1",
         "larastan/larastan": "^2.0",
         "laravel/pint": "^1.13",
         "laravel/sail": "^1.26",
