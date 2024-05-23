@@ -19,12 +19,10 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        os: [ ubuntu-latest, windows-latest ]
-        php: [ 8.3 ]
+        os: [ ubuntu-latest, macos-latest ]
+        php: [ 8.2, 8.3 ]
         laravel: [ 11.* ]
-        stability: [ prefer-lowest, prefer-stable ]
-        include:
-          - laravel: 11.*
+        stability: [ prefer-stable ]
 
     name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
 
@@ -43,11 +41,7 @@ jobs:
         run: composer install -n --prefer-dist
 
       - name: Prepare Laravel Application
-        run: |
-          php artisan key:generate --env=testing
+        run: php artisan key:generate --env=testing
 
       - name: Run tests
         run: php artisan test
-
-      # - name: Run Static Analysis
-      #   run: ./vendor/bin/phpstan analyse --memory-limit=2G --error-format=github
