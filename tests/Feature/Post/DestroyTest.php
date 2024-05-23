@@ -18,7 +18,7 @@ class DestroyTest extends TestCase
         $post = Post::factory()->create(['user_id' => $user->id]);
         Sanctum::actingAs($user);
 
-        $response = $this->deleteJson('/api/posts/' . $post->id);
+        $response = $this->deleteJson('/api/posts/'.$post->id);
         $response->assertStatus(200)
             ->assertJsonStructure(['data' => ['message']]);
 

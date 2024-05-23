@@ -14,7 +14,7 @@ class ShowTest extends TestCase
     {
         $post = Post::factory()->free()->create();
 
-        $response = $this->getJson('/api/posts/' . $post->id);
+        $response = $this->getJson('/api/posts/'.$post->id);
 
         $response->assertStatus(200)
             ->assertJsonStructure(['data' => [

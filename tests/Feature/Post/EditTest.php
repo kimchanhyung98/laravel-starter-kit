@@ -18,7 +18,7 @@ class EditTest extends TestCase
         $post = Post::factory()->create(['user_id' => $user->id]);
         Sanctum::actingAs($user);
 
-        $response = $this->getJson('/api/posts/' . $post->id . '/edit');
+        $response = $this->getJson('/api/posts/'.$post->id.'/edit');
 
         $response->assertStatus(200)
             ->assertJsonStructure(['data' => ['id', 'type', 'title', 'contents', 'is_open']]);

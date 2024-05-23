@@ -18,7 +18,7 @@ class UpdateTest extends TestCase
         $post = Post::factory()->create(['user_id' => $user->id]);
         Sanctum::actingAs($user);
 
-        $response = $this->putJson('/api/posts/' . $post->id, [
+        $response = $this->putJson('/api/posts/'.$post->id, [
             'title' => 'Updated Title',
             'contents' => 'Updated Contents',
             'type' => 'free',
