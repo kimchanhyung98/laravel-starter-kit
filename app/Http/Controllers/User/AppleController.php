@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Account;
+namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Account\AccessTokenResource;
+use App\Http\Resources\User\AccessTokenResource;
 use App\Models\User;
 use App\Models\User\UserApple;
 use Carbon\CarbonImmutable;
@@ -16,7 +16,7 @@ use Lcobucci\JWT\Configuration;
 class AppleController extends Controller
 {
     /**
-     * 소셜로그인 (애플)
+     * [미사용] 소셜로그인 (애플)
      */
     public function __invoke(Request $request): AccessTokenResource
     {

@@ -13,33 +13,32 @@ class Post extends Model
 {
     use HasFactory, Searchable, SoftDeletes;
 
-    protected $fillable = [
-        'user_id', 'type', 'title', 'contents', 'is_open',
-    ];
+    protected $guarded = [];
 
     protected $hidden = [
         'deleted_at',
     ];
 
     protected $casts = [
-        'is_open' => 'boolean',
+        'is_published' => 'boolean',
     ];
-
-    public function toSearchableArray(): array
-    {
-        return [
-            'title' => $this->title,
-            'contents' => $this->contents,
-        ];
-    }
 
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class)->withTrashed();
     }
 
-    public function scopeOpen(Builder $query): void
+    public function scopePublished(Builder $query): void
     {
-        $query->where('is_open', true);
+        $query->where('is_published', true);
+    }
+
+    // algolia
+    public function toSearchableArray(): array
+    {
+        return [
+            'title' => $this->title,
+            'contents' => $this->contents,
+        ];
     }
 }

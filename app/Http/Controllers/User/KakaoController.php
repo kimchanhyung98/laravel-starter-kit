@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Account;
+namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Account\AccessTokenResource;
+use App\Http\Resources\User\AccessTokenResource;
 use App\Models\User;
 use App\Models\User\UserKakao;
 use Exception;
@@ -14,7 +14,7 @@ use Laravel\Socialite\Facades\Socialite;
 class KakaoController extends Controller
 {
     /**
-     * 소셜로그인 (카카오)
+     * [미사용] 소셜로그인 (카카오)
      */
     public function __invoke(Request $request): AccessTokenResource
     {

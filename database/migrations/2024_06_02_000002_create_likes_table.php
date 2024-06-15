@@ -11,15 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('posts', static function (Blueprint $table) {
+        Schema::create('likes', static function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
-            $table->enum('type', ['free', 'notice', 'faq'])->nullable();
-            $table->string('title', 100);
-            $table->longText('contents');
-            $table->unsignedInteger('hit')->default(0);
-            $table->unsignedInteger('likes_count')->default(0);
-            $table->boolean('is_published')->default(0);
+            $table->morphs('likeable');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -30,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('posts');
+        Schema::dropIfExists('likes');
     }
 };
