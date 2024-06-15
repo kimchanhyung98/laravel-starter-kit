@@ -1,0 +1,134 @@
+models:
+  User: # Update default model,migration
+    name: string:50
+    nickname: string:50 unique
+    email: string:100 nullable unique
+    phone: string:20 nullable unique
+    password: string:100 nullable
+    provider: string:20 nullable
+    provider_id: string:200 nullable
+    provider_token: string:200 nullable
+    timestamps
+    softDeletes
+    deleted_reason: string:200 nullable
+    relationships:
+      hasMany: UserApple, UserKakao, Post, Comment, Like
+
+  UserApple:
+    user_id: id foreign:users.id
+    name: string:200
+    email: string:200 nullable
+    sub: string:200 nullable
+    at_hash: string:200 nullable
+    token: text nullable
+    timestamps
+    softDeletes
+    relationships:
+      belongsTo: User
+
+  UserKakao:
+    user_id: id foreign:users.id
+    name: string:200 nullable
+    email: string:200 nullable
+    nickname: string:200 nullable
+    avatar: string:200 nullable
+    gender: string:20 nullable
+    birthday: string:20 nullable
+    calendar: string:20 nullable
+    age_range: string:20 nullable
+    sub: string:200 nullable
+    timestamps
+    softDeletes
+    relationships:
+      belongsTo: User
+
+  Post:
+    user_id: id foreign:users.id
+    type: enum:free,notice,faq nullable
+    title: string:100
+    content: longtext
+    hit : unsignedInteger default:0
+    likes_count: unsignedInteger default:0
+    is_published: boolean default:0
+    timestamps
+    softDeletes
+    relationships:
+      belongsTo: User
+      hasMany: Comment
+      morphMany: Like
+
+  Comment:
+    user_id: id foreign:users.id
+    post_id: id foreign:posts.id
+    parent_id: unsignedInteger nullable
+    content: text
+    likes_count: unsignedInteger default:0
+    softDeletes
+    timestamps
+    relationships:
+      belongsTo: User, Post
+      morphMany: Like
+
+  Like:
+    user_id: id foreign:users.id
+    # likeable: morphs
+    softDeletes
+    timestamps
+    relationships:
+      belongsTo: User
+      morphTo: likeable
+
+seeders: User, UserApple, UserKakao, Post, Comment, Like
+
+controllers:
+  User:
+    resource: api.store, api.show, api.update, api.destroy
+    store:
+      validate: name, nickname, email, password
+      save: user
+    show:
+      find: user
+    update:
+      validate: name, nickname, email, password
+      update: user
+    destroy:
+      validate: deleted_reason
+      delete: user
+
+  Post:
+    resource: api
+    index:
+      validate: search, per_page
+    store:
+      validate: title, content
+      save: post
+    show:
+      find: post
+      with: comments
+    edit:
+      find: post
+    update:
+      validate: title, content
+      update: post
+    destroy:
+      validate: deleted_reason
+      delete: post
+
+  Comment:
+    resource: api.store, api.update, api.destroy
+    store:
+      validate: post_id, content
+      save: comment
+    update:
+      validate: content
+      update: comment
+    destroy:
+      delete: comment
+
+  Like:
+    resource: api.store, api.destroy
+    store:
+      validate: likeable_id, likeable_type
+      save: like
+    destroy:
+      delete: like

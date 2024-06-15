@@ -19,7 +19,9 @@ class User extends Authenticatable
     protected $guarded = [];
 
     protected $hidden = [
+        'phone',
         'password',
+        'provider_token',
         'remember_token',
     ];
 
