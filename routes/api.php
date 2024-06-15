@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\Comment\CommentDestroyController;
+use App\Http\Controllers\Comment\CommentIndexController;
+use App\Http\Controllers\Comment\CommentStoreController;
+use App\Http\Controllers\Comment\CommentUpdateController;
 use App\Http\Controllers\Post\PostDestroyController;
 use App\Http\Controllers\Post\PostEditController;
 use App\Http\Controllers\Post\PostIndexController;
@@ -31,7 +35,6 @@ Route::prefix('users')->group(function () {
 
         // Route::post('update', UserUpdateController::class);
         Route::put('/', UserUpdateController::class);
-
         // Route::post('delete', UserDestroyController::class);
         Route::delete('/', UserDestroyController::class);
     });
@@ -56,7 +59,6 @@ Route::prefix('posts')->group(function () {
     });
 });
 
-/*
 // 댓글
 Route::prefix('comments')->group(static function () {
     Route::get('/', CommentIndexController::class);
@@ -67,13 +69,13 @@ Route::prefix('comments')->group(static function () {
         Route::prefix('{comment}')->group(static function () {
             // Route::post('update', CommentUpdateController::class);
             Route::put('/', CommentUpdateController::class);
-
             // Route::post('delete', CommentDestroyController::class);
             Route::delete('/', CommentDestroyController::class);
         });
     });
 });
 
+/*
 // 좋아요
 Route::group(['prefix' => 'likes', 'middleware' => 'auth:sanctum'], static function () {
     Route::get('/', LikeIndexController::class);
