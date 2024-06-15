@@ -4,7 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\SignInRequest;
-use App\Http\Resources\Account\AccessTokenResource;
+use App\Http\Resources\User\AccessTokenResource;
 use App\Models\User;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -25,7 +25,7 @@ class SignInController extends Controller
             }
         } catch (ModelNotFoundException $e) {
             // logger($e);
-            abort(401);
+            abort(401, __('user.signin_denied'));
         } catch (Exception $e) {
             logger($e);
             abort(500);

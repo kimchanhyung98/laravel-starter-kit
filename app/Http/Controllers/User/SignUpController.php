@@ -4,7 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\SignUpRequest;
-use App\Http\Resources\Account\AccessTokenResource;
+use App\Http\Resources\User\AccessTokenResource;
 use App\Models\User;
 use Exception;
 use Illuminate\Support\Facades\DB;
@@ -30,7 +30,7 @@ class SignUpController extends Controller
         } catch (Exception $e) {
             DB::rollBack();
             logger($e);
-            abort($e->getCode(), $e->getMessage());
+            abort($e->getCode(), __('user.signup_denied'));
         }
 
         return new AccessTokenResource(
