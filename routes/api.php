@@ -61,7 +61,7 @@ Route::prefix('posts')->group(function () {
 
 // 댓글
 Route::prefix('comments')->group(static function () {
-    Route::get('/', CommentIndexController::class);
+    // Route::get('/', CommentIndexController::class);
 
     Route::middleware('auth:sanctum')->group(function () {
         Route::post('/', CommentStoreController::class);
