@@ -1,44 +1,79 @@
 <?php
 
-use App\Http\Controllers\Account\AppleController;
-use App\Http\Controllers\Account\KakaoController;
-use App\Http\Controllers\Account\SignInController;
-use App\Http\Controllers\Account\SignUpController;
-use App\Http\Controllers\PostController;
-use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\User\SignInController;
+use App\Http\Controllers\User\SignOutController;
+use App\Http\Controllers\User\SignUpController;
 use App\Http\Controllers\User\UserDestroyController;
+use App\Http\Controllers\User\UserShowController;
 use App\Http\Controllers\User\UserUpdateController;
 use Illuminate\Support\Facades\Route;
 
-// Account
-Route::prefix('accounts')->group(static function () {
-    Route::middleware('auth:sanctum')->group(static function () {
-        Route::get('/', UserController::class);
-        Route::put('/', UserUpdateController::class);
-        Route::post('delete', UserDestroyController::class);
+// 사용자
+Route::prefix('users')->group(function () {
+    Route::prefix('signin')->group(static function () {
+        Route::post('/', SignInController::class);
+        // Route::post('apple', AppleController::class);
+        // Route::post('kakao', KakaoController::class);
     });
 
     Route::post('signup', SignUpController::class);
     // Route::get('verify', VerifyController::class);
 
-    Route::prefix('signin')->group(static function () {
-        Route::post('/', SignInController::class);
-        Route::post('apple', AppleController::class);
-        Route::post('kakao', KakaoController::class);
+    Route::middleware('auth:sanctum')->group(function () {
+        Route::get('/', UserShowController::class);
+        Route::post('signout', SignOutController::class);
+
+        // Route::post('update', UserUpdateController::class);
+        Route::put('/', UserUpdateController::class);
+
+        // Route::post('delete', UserDestroyController::class);
+        Route::delete('/', UserDestroyController::class);
     });
 });
 
-// Board
-Route::group(['prefix' => 'posts', 'controller' => PostController::class], static function () {
-    Route::get('/', 'index');
-    Route::get('{post}', 'show');
+/*
+// 게시판
+Route::prefix('posts')->group(function () {
+    Route::get('/', PostIndexController::class);
+    Route::get('{post}', PostShowController::class);
 
-    Route::middleware('auth:sanctum')->group(static function () {
-        Route::post('/', 'store');
-        Route::prefix('{post}')->group(static function () {
-            Route::get('edit', 'edit');
-            Route::put('/', 'update');
-            Route::delete('/', 'destroy');
+    Route::middleware('auth:sanctum')->group(function () {
+        Route::post('/', PostStoreController::class);
+
+        Route::prefix('{post}')->group(function () {
+            Route::get('edit', PostEditController::class);
+
+            // Route::post('update', PostUpdateController::class);
+            Route::put('/', PostUpdateController::class);
+            // Route::post('delete', PostDestroyController::class);
+            Route::delete('/', PostDestroyController::class);
         });
     });
 });
+
+// 댓글
+Route::prefix('comments')->group(static function () {
+    Route::get('/', CommentIndexController::class);
+
+    Route::middleware('auth:sanctum')->group(function () {
+        Route::post('/', CommentStoreController::class);
+
+        Route::prefix('{comment}')->group(static function () {
+            // Route::post('update', CommentUpdateController::class);
+            Route::put('/', CommentUpdateController::class);
+
+            // Route::post('delete', CommentDestroyController::class);
+            Route::delete('/', CommentDestroyController::class);
+        });
+    });
+});
+
+// 좋아요
+Route::group(['prefix' => 'likes', 'middleware' => 'auth:sanctum'], static function () {
+    Route::get('/', LikeIndexController::class);
+    Route::post('/', LikeStoreController::class);
+
+    // Route::post('delete', LikeDestroyController::class);
+    Route::delete('/', LikeDestroyController::class);
+});
+*/

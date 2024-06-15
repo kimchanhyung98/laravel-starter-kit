@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Account;
+namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Account\SignInRequest;
+use App\Http\Requests\User\SignInRequest;
 use App\Http\Resources\Account\AccessTokenResource;
 use App\Models\User;
 use Exception;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Hash;
 
 class SignInController extends Controller
@@ -17,14 +18,17 @@ class SignInController extends Controller
     public function __invoke(SignInRequest $request): AccessTokenResource
     {
         try {
-            $user = User::where('email', $request->email)->firstOrFail();
-
+            $user = User::where('login_id', $request->login_id)->firstOrFail();
+            // Gate::allowIf(Hash::check($request->password, $user->password), '로그인 실패');
             if (! Hash::check($request->password, $user->password)) {
-                abort(401);
+                abort(404);
             }
+        } catch (ModelNotFoundException $e) {
+            // logger($e);
+            abort(401);
         } catch (Exception $e) {
             logger($e);
-            abort(401, __('user.signin_denied'));
+            abort(500);
         }
 
         return new AccessTokenResource(

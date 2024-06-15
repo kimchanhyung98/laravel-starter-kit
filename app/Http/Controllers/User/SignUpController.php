@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Account;
+namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Account\SignUpRequest;
+use App\Http\Requests\User\SignUpRequest;
 use App\Http\Resources\Account\AccessTokenResource;
 use App\Models\User;
 use Exception;
@@ -19,17 +19,12 @@ class SignUpController extends Controller
     {
         try {
             DB::beginTransaction();
-            $user = User::firstOrCreate([
-                'email' => $request->email,
-            ], [
+            $user = User::create([
                 'name' => $request->name,
                 'nickname' => $request->nickname,
+                'email' => $request->email,
                 'password' => Hash::make($request->password),
             ]);
-
-            if (! $user->wasRecentlyCreated) {
-                abort(409, __('user.signup_duplicate_email'));
-            }
             // $user->sendEmailVerificationNotification();
             DB::commit();
         } catch (Exception $e) {
