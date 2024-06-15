@@ -5,7 +5,6 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Common\MessageResource;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 
 class SignOutController extends Controller
 {
@@ -16,7 +15,6 @@ class SignOutController extends Controller
     {
         // $request->user()->tokens()->delete();
         $request->user()->currentAccessToken()->delete();
-
 
         return new MessageResource([
             'message' => __('user.signout'),
