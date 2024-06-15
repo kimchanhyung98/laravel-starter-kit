@@ -1,5 +1,11 @@
 <?php
 
+use App\Http\Controllers\Post\PostDestroyController;
+use App\Http\Controllers\Post\PostEditController;
+use App\Http\Controllers\Post\PostIndexController;
+use App\Http\Controllers\Post\PostShowController;
+use App\Http\Controllers\Post\PostStoreController;
+use App\Http\Controllers\Post\PostUpdateController;
 use App\Http\Controllers\User\SignInController;
 use App\Http\Controllers\User\SignOutController;
 use App\Http\Controllers\User\SignUpController;
@@ -31,7 +37,6 @@ Route::prefix('users')->group(function () {
     });
 });
 
-/*
 // 게시판
 Route::prefix('posts')->group(function () {
     Route::get('/', PostIndexController::class);
@@ -51,6 +56,7 @@ Route::prefix('posts')->group(function () {
     });
 });
 
+/*
 // 댓글
 Route::prefix('comments')->group(static function () {
     Route::get('/', CommentIndexController::class);
