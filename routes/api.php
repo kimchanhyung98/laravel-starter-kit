@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\Comment\CommentDestroyController;
-use App\Http\Controllers\Comment\CommentIndexController;
 use App\Http\Controllers\Comment\CommentStoreController;
 use App\Http\Controllers\Comment\CommentUpdateController;
+use App\Http\Controllers\Like\LikeDestroyController;
+use App\Http\Controllers\Like\LikeIndexController;
+use App\Http\Controllers\Like\LikeStoreController;
 use App\Http\Controllers\Post\PostDestroyController;
 use App\Http\Controllers\Post\PostEditController;
 use App\Http\Controllers\Post\PostIndexController;
@@ -75,7 +77,6 @@ Route::prefix('comments')->group(static function () {
     });
 });
 
-/*
 // 좋아요
 Route::group(['prefix' => 'likes', 'middleware' => 'auth:sanctum'], static function () {
     Route::get('/', LikeIndexController::class);
@@ -84,4 +85,3 @@ Route::group(['prefix' => 'likes', 'middleware' => 'auth:sanctum'], static funct
     // Route::post('delete', LikeDestroyController::class);
     Route::delete('/', LikeDestroyController::class);
 });
-*/
