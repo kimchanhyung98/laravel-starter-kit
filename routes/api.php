@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\Comment\CommentDestroyController;
-use App\Http\Controllers\Comment\CommentIndexController;
 use App\Http\Controllers\Comment\CommentStoreController;
 use App\Http\Controllers\Comment\CommentUpdateController;
 use App\Http\Controllers\Like\LikeDestroyController;
