@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\Post\PostShowResource;
 use App\Models\Post;
 use Exception;
+use Illuminate\Support\Facades\Gate;
 
 class PostShowController extends Controller
 {
@@ -14,6 +15,8 @@ class PostShowController extends Controller
      */
     public function __invoke(Post $post): PostShowResource
     {
+        Gate::authorize('view', $post);
+
         try {
             $post->increment('hit');
         } catch (Exception $e) {
