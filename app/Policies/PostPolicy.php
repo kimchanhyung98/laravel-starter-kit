@@ -22,7 +22,7 @@ class PostPolicy
      */
     public function view(?User $_, Post $post): Response
     {
-        if (! $post->is_open) {
+        if (! $post->is_published) {
             $user = Auth::guard('sanctum')->user();
             if ($post->user_id !== $user?->id) {
                 return Response::deny(__('post.view_denied'));

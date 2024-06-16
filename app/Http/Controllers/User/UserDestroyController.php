@@ -4,10 +4,10 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\UserDestroyRequest;
-use App\Http\Resources\MessageResource;
+use App\Http\Resources\Common\MessageResource;
 use Exception;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class UserDestroyController extends Controller
 {
@@ -16,14 +16,14 @@ class UserDestroyController extends Controller
      */
     public function __invoke(UserDestroyRequest $request): MessageResource
     {
-        $user = Auth::user();
-        if (! $user) {
-            abort(401, __('user.unauthorized'));
-        }
-
+        $user = $request->user();
+        // if (! Hash::check($request->password, $user->password)) abort(401, __('user.unauthorized'));
         try {
             DB::beginTransaction();
-            $this->revoke($user, $request->deleted_reason);
+            // $this->revoke(user: $user);
+            $user->update(['deleted_reason' => $request->deleted_reason]);
+            $user->tokens()->delete();
+            $user->delete();
             DB::commit();
         } catch (Exception $e) {
             DB::rollBack();
@@ -37,13 +37,12 @@ class UserDestroyController extends Controller
     }
 
     /**
-     * 소셜 로그인 탈퇴 처리
+     * [미사용] 소셜 로그인 탈퇴 처리
      */
-    private function revoke($user, $reason): void
+    private function revoke($user): void
     {
         if ($user->provider === 'apple') {
             $user->apple->delete();
-            // @todo : Apple 로그인 탈퇴 처리
         } elseif ($user->provider === 'kakao') {
             $user->kakao->delete();
             /*
@@ -54,12 +53,6 @@ class UserDestroyController extends Controller
                     'target_id' => $user->provider_id,
                 ]);
             */
-        } else {
-            $user->update(['password' => null]);
         }
-
-        $user->update(['deleted_reason' => $reason]);
-        $user->tokens()->delete();
-        $user->delete();
     }
 }
