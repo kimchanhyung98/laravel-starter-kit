@@ -18,6 +18,7 @@ class AppleController extends Controller
     /**
      * [미사용] 소셜로그인 (애플)
      */
+    /*
     public function __invoke(Request $request): AccessTokenResource
     {
         $this->getToken($request->redirect_uri);
@@ -26,6 +27,7 @@ class AppleController extends Controller
         try {
             $token = Socialite::driver('apple')->getAccessTokenResponse($request->code);
             $socialUser = Socialite::driver('apple')->userFromToken($token['id_token']);
+            // $socialUser = Socialite::driver('apple')->user();
 
             $user = User::firstOrCreate([
                 'provider' => 'apple',
@@ -57,6 +59,7 @@ class AppleController extends Controller
             $user->createToken('apple')->plainTextToken
         );
     }
+    */
 
     /**
      * Apple JWT Token 설정

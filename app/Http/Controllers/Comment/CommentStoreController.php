@@ -15,12 +15,11 @@ class CommentStoreController extends Controller
      */
     public function __invoke(CommentStoreRequest $request): MessageResource
     {
-        /*
         $this->checkSpamming($request->user()->id);
         if ($request->parent_id) {
             $this->checkReplyDepth($request->parent_id);
         }
-        */
+        // todo : optional check
 
         try {
             $comment = Comment::create([

@@ -15,7 +15,8 @@ class PostStoreController extends Controller
      */
     public function __invoke(PostStoreRequest $request): MessageResource
     {
-        // $this->checkSpamming($request->user()->id);
+        $this->checkSpamming($request->user()->id);
+        // todo : optional check
 
         try {
             $post = Post::create([

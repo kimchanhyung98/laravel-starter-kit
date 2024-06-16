@@ -41,12 +41,17 @@ class LikeDestroyController extends Controller
     /**
      * 좋아요 취소 가능 확인하고 해당 모델 반환
      */
-    private function checkLikeableModel($request): mixed
+    private function checkLikeableModel($request)
     {
         $model = match ($request->like_type) {
-            'post' => Post::findOrFail($request->like_id),
-            'comment' => Comment::findOrFail($request->like_id),
+            'post' => Post::find($request->like_id),
+            'comment' => Comment::find($request->like_id),
+            default => null,
         };
+
+        if (! $model) {
+            abort(404);
+        }
 
         $like = Like::where([
             'user_id' => $request->user()->id,

@@ -16,6 +16,7 @@ class KakaoController extends Controller
     /**
      * [미사용] 소셜로그인 (카카오)
      */
+    /*
     public function __invoke(Request $request): AccessTokenResource
     {
         DB::beginTransaction();
@@ -23,6 +24,7 @@ class KakaoController extends Controller
             // config()->set('services.kakao.redirect', $request->redirect_uri);
             $token = Socialite::driver('kakao')->getAccessTokenResponse($request->code)['access_token'];
             $socialUser = Socialite::driver('kakao')->userFromToken($token);
+            // $socialUser = Socialite::driver('kakao')->user();
 
             $user = User::firstOrCreate([
                 'provider' => 'kakao',
@@ -59,4 +61,5 @@ class KakaoController extends Controller
             $user->createToken('kakao')->plainTextToken
         );
     }
+    */
 }

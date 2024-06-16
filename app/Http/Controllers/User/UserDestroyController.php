@@ -20,7 +20,7 @@ class UserDestroyController extends Controller
         // if (! Hash::check($request->password, $user->password)) abort(401, __('user.unauthorized'));
         try {
             DB::beginTransaction();
-            // $this->revoke(user: $user);
+            $this->revoke(user: $user); // todo : optional sociallogin
             $user->update(['deleted_reason' => $request->deleted_reason]);
             $user->tokens()->delete();
             $user->delete();

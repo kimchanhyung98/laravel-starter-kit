@@ -13,8 +13,8 @@ class SignOutController extends Controller
      */
     public function __invoke(Request $request): MessageResource
     {
-        // $request->user()->tokens()->delete();
-        $request->user()->currentAccessToken()->delete();
+        $request->user()->tokens()->delete();
+        // $request->user()->currentAccessToken()->delete();
 
         return new MessageResource([
             'message' => __('user.signout'),
