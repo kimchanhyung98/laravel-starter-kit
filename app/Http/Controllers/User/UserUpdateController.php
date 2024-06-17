@@ -20,8 +20,8 @@ class UserUpdateController extends Controller
         try {
             DB::beginTransaction();
             $user->update([
+                // 'name' => $request->name,
                 'nickname' => $request->nickname,
-                'email' => $request->email,
                 'password' => $request->password ? Hash::make($request->password) : $user->password,
             ]);
             DB::commit();

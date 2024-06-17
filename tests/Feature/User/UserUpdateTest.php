@@ -14,14 +14,15 @@ class UserUpdateTest extends TestCase
     use RefreshDatabase;
 
     protected array $data = [
-        'name' => 'testing',
-        'email' => 'testing@example.com',
-        'password' => 'TestPassword!',
+        // 'name' => '홍길동',
+        'nickname' => 'edit_nickname',
+        // 'email' => 'testing@example.com',
+        'password' => 'Password1!',
     ];
 
     private function sendUserUpdate(): TestResponse
     {
-        return $this->postJson('api/users/update', $this->data);
+        return $this->putJson('api/users', $this->data);
     }
 
     public function test_user_update_success(): void
@@ -30,7 +31,7 @@ class UserUpdateTest extends TestCase
 
         $this->sendUserUpdate()
             ->assertOk()
-            ->assertJsonStructure(['data' => ['login_id', 'name', 'email', 'created_at']]);
+            ->assertJsonStructure(['data' => ['name', 'nickname', 'email', 'created_at']]);
     }
 
     public function test_user_update_fail_with_unauthorized(): void
