@@ -13,10 +13,10 @@ class SignUpTest extends TestCase
     use RefreshDatabase;
 
     protected array $data = [
-        'login_id' => 'tester',
-        'name' => 'testing',
+        'name' => '홍길동',
+        'nickname' => 'tester',
         'email' => 'testing@example.com',
-        'password' => 'TestPassword!',
+        'password' => 'Password1!',
     ];
 
     private function sendSignUp(): TestResponse
@@ -29,15 +29,24 @@ class SignUpTest extends TestCase
         $this->sendSignUp()
             ->assertCreated()
             ->assertJsonStructure(['data' => ['access_token']]);
+
+        /* // todo : check token
+        $token = $response->json('data.access_token');
+        $this->withHeader('Authorization', 'Bearer '.$token)
+            ->getJson('/api/users')
+            ->assertStatus(200);
+        */
     }
 
     public function test_signup_email_duplicate(): void
     {
+        // Create user with testing email
         User::factory()->create([
-            'login_id' => 'new_tester',
+            'nickname' => 'new_tester',
             'email' => 'testing@example.com',
         ]);
 
+        // Send signup with duplicate email
         $this->sendSignUp()
             ->assertUnprocessable()
             ->assertJsonValidationErrors(['email' => 'The email has already been taken.']);
@@ -46,9 +55,9 @@ class SignUpTest extends TestCase
     #[DataProvider('invalidFieldsProvider')]
     public function test_signup_fail($field, $value, $error): void
     {
-        $this->data[$field] = $value;
+        // User::factory()->create($this->data);
 
-        User::factory()->create(['login_id' => 'tester']);
+        $this->data[$field] = $value;
 
         $this->sendSignUp()
             ->assertUnprocessable()
@@ -58,17 +67,15 @@ class SignUpTest extends TestCase
     public static function invalidFieldsProvider(): array
     {
         return [
-            'login_id.null' => ['login_id', null, 'The login id field is required.'],
-            'login_id.empty' => ['login_id', '', 'The login id field is required.'],
-            'login_id.min' => ['login_id', 'aa', 'The login id field must be at least 3 characters.'],
-            'login_id.max' => ['login_id', str_repeat('a', 21), 'The login id field must not be greater than 20 characters.'],
-            'login_id.regex' => ['login_id', 'tester!', 'The login id field format is invalid.'],
-            'login_id.unique' => ['login_id', 'tester', 'The login id has already been taken.'],
-
             'name.null' => ['name', null, 'The name field is required.'],
             'name.empty' => ['name', '', 'The name field is required.'],
-            'name.min' => ['name', 't', 'The name field must be at least 2 characters.'],
-            'name.max' => ['name', str_repeat('a', 101), 'The name field must not be greater than 100 characters.'],
+            'name.min' => ['name', '김', 'The name field must be at least 2 characters.'],
+            'name.max' => ['name', str_repeat('a', 51), 'The name field must not be greater than 100 characters.'],
+
+            'nickname.null' => ['nickname', null, 'The nickname field is required.'],
+            'nickname.empty' => ['nickname', '', 'The nickname field is required.'],
+            'nickname.max' => ['nickname', str_repeat('a', 51), 'The nickname field must not be greater than 50 characters.'],
+            'nickname.duplicate' => ['nickname', 'tester', 'The nickname has already been taken.'],
 
             'email.null' => ['email', null, 'The email field is required.'],
             'email.empty' => ['email', '', 'The email field is required.'],
@@ -78,7 +85,7 @@ class SignUpTest extends TestCase
 
             'password.null' => ['password', null, 'The password field is required.'],
             'password.empty' => ['password', '', 'The password field is required.'],
-            'password.min' => ['password', 'Short!', 'The password field must be at least 12 characters.'],
+            'password.min' => ['password', 'Short!', 'The password field must be at least 8 characters.'],
             'password.max' => ['password', str_repeat('a', 101).'A!', 'The password field must not be greater than 100 characters.'],
             'password.mixed' => ['password', 'testpassword!', 'The password field must contain at least one uppercase and one lowercase letter.'],
             'password.symbol' => ['password', 'TestPassword', 'The password field must contain at least one symbol.'],

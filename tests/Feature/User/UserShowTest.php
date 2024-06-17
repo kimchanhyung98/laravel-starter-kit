@@ -23,7 +23,7 @@ class UserShowTest extends TestCase
 
         $this->sendUserShow()
             ->assertOk()
-            ->assertJsonStructure(['data' => ['login_id', 'name', 'email', 'created_at']]);
+            ->assertJsonStructure(['data' => ['name', 'nickname', 'email', 'created_at']]);
     }
 
     public function test_user_show_fail_with_unauthorized(): void

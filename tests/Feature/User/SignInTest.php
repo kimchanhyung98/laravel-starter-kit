@@ -13,8 +13,10 @@ class SignInTest extends TestCase
     use RefreshDatabase;
 
     protected array $data = [
-        'login_id' => 'tester',
-        'password' => 'TestPassword!',
+        // 'name' => '홍길동',
+        // 'nickname' => 'tester',
+        'email' => 'testing@example.com',
+        'password' => 'Password1!',
     ];
 
     private function sendSignIn(): TestResponse
@@ -24,7 +26,7 @@ class SignInTest extends TestCase
 
     public function test_signin_success(): void
     {
-        User::factory()->create(['login_id' => 'tester']);
+        User::factory()->create(['email' => 'testing@example.com']);
 
         $this->sendSignIn()
             ->assertCreated()
@@ -33,7 +35,7 @@ class SignInTest extends TestCase
 
     public function test_signin_deleted_user(): void
     {
-        User::factory()->deleted()->create(['login_id' => 'tester']);
+        User::factory()->deleted()->create(['email' => 'testing@example.com']);
 
         $this->sendSignIn()
             ->assertUnauthorized();
@@ -44,7 +46,7 @@ class SignInTest extends TestCase
     {
         $this->data[$field] = $value;
 
-        User::factory()->create(['login_id' => 'tester']);
+        User::factory()->create(['email' => 'testing@example.com']);
 
         $this->sendSignIn()
             ->assertUnprocessable()
@@ -54,17 +56,14 @@ class SignInTest extends TestCase
     public static function invalidFieldsProvider(): array
     {
         return [
-            'login_id.null' => ['login_id', null, 'The login id field is required.'],
-            'login_id.empty' => ['login_id', '', 'The login id field is required.'],
-            'login_id.min' => ['login_id', 'test', 'The login id field must be at least 5 characters.'],
-            'login_id.max' => ['login_id', str_repeat('a', 101), 'The login id field must not be greater than 100 characters.'],
+            'email.null' => ['email', null, 'The email field is required.'],
+            'email.empty' => ['email', '', 'The email field is required.'],
+            'email.invalid' => ['email', 'invalid', 'The email must be a valid email address.'],
 
             'password.null' => ['password', null, 'The password field is required.'],
             'password.empty' => ['password', '', 'The password field is required.'],
-            'password.min' => ['password', 'Short!', 'The password field must be at least 12 characters.'],
-            'password.max' => ['password', str_repeat('a', 20).'A!', 'The password field must not be greater than 20 characters.'],
-            'password.mixed' => ['password', 'testpassword!', 'The password field must contain at least one uppercase and one lowercase letter.'],
-            'password.symbol' => ['password', 'TestPassword', 'The password field must contain at least one symbol.'],
+            'password.min' => ['password', 'Short!', 'The password field must be at least 8 characters.'],
+            'password.max' => ['password', str_repeat('a', 100).'A!', 'The password field must not be greater than 100 characters.'],
         ];
     }
 }
