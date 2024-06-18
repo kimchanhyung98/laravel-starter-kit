@@ -18,7 +18,7 @@ class SignInController extends Controller
     public function __invoke(SignInRequest $request): AccessTokenResource
     {
         try {
-            $user = User::where('login_id', $request->login_id)->firstOrFail();
+            $user = User::where('email', $request->email)->firstOrFail();
             // Gate::allowIf(Hash::check($request->password, $user->password), '로그인 실패');
             if (! Hash::check($request->password, $user->password)) {
                 abort(404);
