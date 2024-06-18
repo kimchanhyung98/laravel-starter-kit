@@ -21,7 +21,8 @@ class PostUpdateTest extends TestCase
 
     private function sendPostUpdate(int $postId): TestResponse
     {
-        return $this->putJson('api/posts/'.$postId.'', $this->data);
+        return $this->putJson('api/posts/'.$postId, $this->data);
+        // return $this->postJson('api/posts/'.$postId.'/update', $this->data);
     }
 
     public function test_post_update_success(): void

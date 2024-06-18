@@ -21,7 +21,8 @@ class CommentUpdateTest extends TestCase
 
     private function sendCommentUpdate(int $commentId): TestResponse
     {
-        return $this->postJson('api/comments/'.$commentId.'/update', $this->data);
+        return $this->putJson('api/comments/'.$commentId, $this->data);
+        // return $this->postJson('api/comments/'.$commentId.'/update', $this->data);
     }
 
     public function test_comment_update_success(): void

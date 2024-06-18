@@ -21,6 +21,7 @@ class UserUpdateTest extends TestCase
     private function sendUserUpdate(): TestResponse
     {
         return $this->putJson('api/users', $this->data);
+        // return $this->postJson('api/users/update', $this->data);
     }
 
     public function test_user_update_success(): void

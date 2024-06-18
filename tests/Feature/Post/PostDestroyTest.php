@@ -16,6 +16,7 @@ class PostDestroyTest extends TestCase
     private function sendPostDestroy(int $postId): TestResponse
     {
         return $this->deleteJson('api/posts/'.$postId);
+        // return $this->postJson('api/posts/'.$postId.'/delete');
     }
 
     public function test_post_destroy_success(): void

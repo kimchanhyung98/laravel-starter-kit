@@ -20,8 +20,8 @@ class UserDestroyTest extends TestCase
 
     private function sendUserDestroy(): TestResponse
     {
+        return $this->deleteJson('api/users');
         // return $this->postJson('api/users/delete', $this->data);
-        return $this->deleteJson('api/users', $this->data);
     }
 
     public function test_user_destroy_success(): void

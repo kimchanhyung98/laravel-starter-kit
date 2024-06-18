@@ -23,7 +23,8 @@ class LikeDestroyTest extends TestCase
 
     private function sendLikeDestroy(): TestResponse
     {
-        return $this->postJson('api/likes/delete', $this->data);
+        return $this->deleteJson('api/likes', $this->data);
+        // return $this->postJson('api/likes/delete', $this->data);
     }
 
     public function test_like_destroy_success_with_post(): void
