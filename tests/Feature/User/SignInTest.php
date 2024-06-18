@@ -29,7 +29,7 @@ class SignInTest extends TestCase
         User::factory()->create(['email' => 'testing@example.com']);
 
         $this->sendSignIn()
-            ->assertCreated()
+            ->assertOk()
             ->assertJsonStructure(['data' => ['access_token']]);
     }
 
@@ -58,12 +58,12 @@ class SignInTest extends TestCase
         return [
             'email.null' => ['email', null, 'The email field is required.'],
             'email.empty' => ['email', '', 'The email field is required.'],
-            'email.invalid' => ['email', 'invalid', 'The email must be a valid email address.'],
+            'email.invalid' => ['email', 'invalid-email', 'The email field must be a valid email address.'],
 
             'password.null' => ['password', null, 'The password field is required.'],
             'password.empty' => ['password', '', 'The password field is required.'],
             'password.min' => ['password', 'Short!', 'The password field must be at least 8 characters.'],
-            'password.max' => ['password', str_repeat('a', 100).'A!', 'The password field must not be greater than 100 characters.'],
+            'password.max' => ['password', str_repeat('a', 99).'A1!', 'The password field must not be greater than 100 characters.'],
         ];
     }
 }

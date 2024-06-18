@@ -29,7 +29,8 @@ class UserDestroyTest extends TestCase
         Sanctum::actingAs(User::factory()->create());
 
         $this->sendUserDestroy()
-            ->assertNoContent();
+            ->assertOk()
+            ->assertJsonStructure(['data' => ['message']]);
     }
 
     public function test_user_destroy_no_reason_success(): void

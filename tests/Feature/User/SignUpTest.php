@@ -40,23 +40,31 @@ class SignUpTest extends TestCase
 
     public function test_signup_email_duplicate(): void
     {
-        // Create user with testing email
         User::factory()->create([
             'nickname' => 'new_tester',
             'email' => 'testing@example.com',
         ]);
 
-        // Send signup with duplicate email
         $this->sendSignUp()
             ->assertUnprocessable()
             ->assertJsonValidationErrors(['email' => 'The email has already been taken.']);
     }
 
+    public function test_signup_nickname_duplicate(): void
+    {
+        User::factory()->create([
+            'nickname' => 'tester',
+            'email' => 'new_tester@example.com',
+        ]);
+
+        $this->sendSignUp()
+            ->assertUnprocessable()
+            ->assertJsonValidationErrors(['nickname' => 'The nickname has already been taken.']);
+    }
+
     #[DataProvider('invalidFieldsProvider')]
     public function test_signup_fail($field, $value, $error): void
     {
-        // User::factory()->create($this->data);
-
         $this->data[$field] = $value;
 
         $this->sendSignUp()
@@ -70,16 +78,16 @@ class SignUpTest extends TestCase
             'name.null' => ['name', null, 'The name field is required.'],
             'name.empty' => ['name', '', 'The name field is required.'],
             'name.min' => ['name', '김', 'The name field must be at least 2 characters.'],
-            'name.max' => ['name', str_repeat('a', 51), 'The name field must not be greater than 100 characters.'],
+            'name.max' => ['name', str_repeat('a', 51), 'The name field must not be greater than 50 characters.'],
 
             'nickname.null' => ['nickname', null, 'The nickname field is required.'],
             'nickname.empty' => ['nickname', '', 'The nickname field is required.'],
             'nickname.max' => ['nickname', str_repeat('a', 51), 'The nickname field must not be greater than 50 characters.'],
-            'nickname.duplicate' => ['nickname', 'tester', 'The nickname has already been taken.'],
+            // 'nickname.duplicate' => ['nickname', 'tester', 'The nickname has already been taken.'],
 
             'email.null' => ['email', null, 'The email field is required.'],
             'email.empty' => ['email', '', 'The email field is required.'],
-            'email.max' => ['email', str_repeat('a', 101).'@example.com', 'The email field must not be greater than 100 characters.'],
+            'email.max' => ['email', str_repeat('a', 91).'@example.com', 'The email field must not be greater than 100 characters.'],
             'email.invalid' => ['email', 'invalid-email', 'The email field must be a valid email address.'],
             // 'email.duplicate' => ['email', 'testing@example.com', 'The email has already been taken.'],
 

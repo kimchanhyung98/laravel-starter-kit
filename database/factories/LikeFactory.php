@@ -2,11 +2,11 @@
 
 namespace Database\Factories;
 
+use App\Models\Comment;
 use App\Models\Like;
+use App\Models\Post;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Models\Post;
-use App\Models\Comment;
 
 class LikeFactory extends Factory
 {
@@ -24,7 +24,7 @@ class LikeFactory extends Factory
     {
         $likeableType = $this->faker->randomElement([
             Post::class,
-            Comment::class
+            Comment::class,
         ]);
 
         return [

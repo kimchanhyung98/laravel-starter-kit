@@ -26,6 +26,13 @@ class UserFactory extends Factory
         ];
     }
 
+    public function deleted(): UserFactory
+    {
+        return $this->state([
+            'deleted_at' => now(),
+        ]);
+    }
+
     /*
     public function apple(): UserFactory
     {
