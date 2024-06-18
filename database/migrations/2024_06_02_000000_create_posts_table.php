@@ -19,7 +19,7 @@ return new class extends Migration
             $table->longText('contents');
             $table->unsignedInteger('hit')->default(0);
             $table->unsignedInteger('likes_count')->default(0);
-            $table->boolean('is_published')->default(0);
+            $table->boolean('is_published')->default(1);
             $table->timestamps();
             $table->softDeletes();
         });

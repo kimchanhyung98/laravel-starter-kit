@@ -13,20 +13,28 @@ class PostFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => User::factory(),
-            'type' => fake()->randomElement(['free', 'notice', 'faq']),
-            'title' => fake()->sentence,
-            'contents' => fake()->text,
-            'hit' => fake()->numberBetween(0, 1000),
-            'is_open' => fake()->boolean,
+            'user_id' => User::inRandomOrder()->first()->id,
+            'type' => $this->faker->randomElement(['free', 'notice', 'faq']),
+            'title' => $this->faker->sentence(4),
+            'contents' => $this->faker->paragraphs(3, true),
+            'hit' => $this->faker->numberBetween(0, 100),
+            'likes_count' => $this->faker->numberBetween(0, 100),
+            'is_published' => $this->faker->boolean(),
+
         ];
     }
 
-    public function free(): PostFactory
+    public function randomCreated(): PostFactory
     {
         return $this->state([
-            'type' => 'free',
-            'is_open' => true,
+            'created_at' => $this->faker->dateTimeBetween('-1 month'),
+        ]);
+    }
+
+    public function deleted(): PostFactory
+    {
+        return $this->state([
+            'deleted_at' => now(),
         ]);
     }
 }
