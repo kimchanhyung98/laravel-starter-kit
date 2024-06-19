@@ -32,7 +32,7 @@ class LikeDestroyTest extends TestCase
         $user = User::factory()->create();
         Sanctum::actingAs($user);
 
-        $like = Like::factory()->create([
+        $like = Like::create([
             'user_id' => $user->id,
             'likeable_id' => Post::factory()->create()->id,
             'likeable_type' => Post::class,
@@ -54,7 +54,7 @@ class LikeDestroyTest extends TestCase
             'post_id' => Post::factory()->create()->id,
         ]);
 
-        $like = Like::factory()->create([
+        $like = Like::create([
             'user_id' => $user->id,
             'likeable_id' => $comment->id,
             'likeable_type' => Comment::class,
