@@ -16,7 +16,7 @@ class LikeSeeder extends Seeder
     {
         // Like::factory(50)->create();
 
-        if (Post::count() === 0 || Comment::count() === 0){
+        if (Post::count() === 0 || Comment::count() === 0) {
             $this->call([
                 PostSeeder::class,
                 CommentSeeder::class,

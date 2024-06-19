@@ -17,7 +17,7 @@ class SignOutController extends Controller
         // $request->user()->currentAccessToken()->delete();
 
         return new MessageResource([
-            'message' => __('user.signout')
+            'message' => __('user.signout'),
         ], 204);
     }
 }

@@ -15,7 +15,7 @@ class PostShowTest extends TestCase
 
     private function sendPostShow(int $postId): TestResponse
     {
-        return $this->getJson('api/posts/' . $postId);
+        return $this->getJson('api/posts/'.$postId);
     }
 
     public function test_post_show_success(): void
@@ -38,7 +38,7 @@ class PostShowTest extends TestCase
 
         $post = Post::factory()->create([
             'user_id' => $user->id,
-            'is_published' => false
+            'is_published' => false,
         ]);
 
         $this->sendPostShow($post->id)
@@ -54,7 +54,7 @@ class PostShowTest extends TestCase
 
         $post = Post::factory()->create([
             'user_id' => User::factory()->create()->id,
-            'is_published' => false
+            'is_published' => false,
         ]);
 
         $this->sendPostShow($post->id)
