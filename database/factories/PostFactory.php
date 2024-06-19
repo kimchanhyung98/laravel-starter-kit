@@ -19,7 +19,7 @@ class PostFactory extends Factory
             'contents' => $this->faker->paragraphs(3, true),
             'hit' => $this->faker->numberBetween(0, 100),
             'likes_count' => $this->faker->numberBetween(0, 100),
-            'is_published' => $this->faker->boolean(),
+            'is_published' => true, //$this->faker->boolean(),
 
         ];
     }
