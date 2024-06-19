@@ -20,10 +20,10 @@ class PostUpdateController extends Controller
 
         try {
             $post->update([
-                'type' => $request->type,
+                // 'type' => $request->type,
                 'title' => $request->title,
                 'contents' => $request->contents,
-                'is_published' => $request->is_published,
+                // 'is_published' => $request->is_published,
             ]);
             $post->searchable();
         } catch (Exception $e) {

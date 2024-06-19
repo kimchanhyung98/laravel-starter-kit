@@ -34,7 +34,7 @@ class SignUpController extends Controller
         }
 
         return new AccessTokenResource(
-            $user->createToken('token-name')->plainTextToken
+            $user->createToken('token-name')->plainTextToken, 201
         );
     }
 }

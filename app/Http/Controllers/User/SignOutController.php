@@ -18,6 +18,6 @@ class SignOutController extends Controller
 
         return new MessageResource([
             'message' => __('user.signout'),
-        ]);
+        ], 204);
     }
 }

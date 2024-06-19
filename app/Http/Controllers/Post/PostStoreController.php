@@ -24,7 +24,7 @@ class PostStoreController extends Controller
                 'type' => $request->type ?? 'free',
                 'title' => $request->title,
                 'contents' => $request->contents,
-                'is_published' => $request->is_published ?? true,
+                // 'is_published' => $request->is_published ?? true,
             ]);
             $post->searchable();
         } catch (Exception $e) {

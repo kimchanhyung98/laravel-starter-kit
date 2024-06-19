@@ -12,7 +12,9 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         User::factory(10)->create();
-        UserApple::factory(5)->create();
-        UserKakao::factory(5)->create();
+        User::factory(5)->deleted()->create();
+
+        // UserApple::factory(5)->create();
+        // UserKakao::factory(5)->create();
     }
 }

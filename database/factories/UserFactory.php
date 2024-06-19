@@ -17,7 +17,7 @@ class UserFactory extends Factory
             'nickname' => fake()->unique()->userName(),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => null,
-            'password' => bcrypt('password'),
+            'password' => bcrypt('Password1!'),
             'phone' => fake()->phoneNumber(),
             'remember_token' => Str::random(10),
             'provider' => null,
@@ -26,6 +26,14 @@ class UserFactory extends Factory
         ];
     }
 
+    public function deleted(): UserFactory
+    {
+        return $this->state([
+            'deleted_at' => now(),
+        ]);
+    }
+
+    /*
     public function apple(): UserFactory
     {
         return $this->state([
@@ -43,4 +51,5 @@ class UserFactory extends Factory
             'provider_token' => fake()->md5,
         ]);
     }
+    */
 }

@@ -20,7 +20,7 @@ class PostIndexController extends Controller
                 ->when($request->type, function ($query, $type) {
                     return $query->where('type', $type);
                 })->query(function ($query) {
-                    return $query->open()->with('user:id,nickname');
+                    return $query->published()->with('user:id,nickname');
                 })->orderBy('id', 'desc')
                 ->simplePaginate($request->per_page ?? 10)
         );

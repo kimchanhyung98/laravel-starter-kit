@@ -12,10 +12,11 @@ class UserUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
+            // 'name' => ['required', 'string', 'min:2', 'max:50'],
             'nickname' => ['required', 'string', 'min:2', 'max:50'],
-            'email' => ['required', 'email', 'max:50', Rule::unique('users')->ignore(Auth::id())],
-            'password' => ['nullable', 'string', Password::min(8)->max(20)->mixedCase()->symbols()],
-            // 'current_password' => ['required', 'string', Password::min(12)->max(20)->mixedCase()->symbols()],
+            // 'email' => ['required', 'email', 'max:50', Rule::unique('users')->ignore(Auth::id())],
+            'password' => ['nullable', 'string', Password::min(8)->max(100)->mixedCase()->symbols()],
+            // 'current_password' => ['required', 'string', Password::min(8)->max(100)->mixedCase()->symbols()],
         ];
     }
 
