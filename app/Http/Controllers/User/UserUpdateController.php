@@ -3,10 +3,9 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\MessageResource;
+use App\Http\Requests\User\UserUpdateRequest;
+use App\Http\Resources\User\UserResource;
 use Exception;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
@@ -15,20 +14,15 @@ class UserUpdateController extends Controller
     /**
      * 회원 정보 수정
      */
-    public function __invoke(Request $request): MessageResource
+    public function __invoke(UserUpdateRequest $request): UserResource
     {
-        $user = Auth::user();
-        if (! $user) {
-            abort(401, __('user.unauthorized'));
-        }
-
+        $user = $request->user();
         try {
             DB::beginTransaction();
             $user->update([
-                'name' => $request->name,
+                // 'name' => $request->name,
                 'nickname' => $request->nickname,
-                'email' => $request->email,
-                // 'password' => $request->password ? Hash::make($request->password) : $user->password,
+                'password' => $request->password ? Hash::make($request->password) : $user->password,
             ]);
             DB::commit();
         } catch (Exception $e) {
@@ -37,8 +31,6 @@ class UserUpdateController extends Controller
             abort($e->getCode(), __('user.update_denied'));
         }
 
-        return new MessageResource([
-            'message' => __('user.update'),
-        ]);
+        return new UserResource($user);
     }
 }

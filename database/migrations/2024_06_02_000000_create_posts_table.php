@@ -15,10 +15,11 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained();
             $table->enum('type', ['free', 'notice', 'faq'])->nullable();
-            $table->string('title', 200);
+            $table->string('title', 100);
             $table->longText('contents');
             $table->unsignedInteger('hit')->default(0);
-            $table->boolean('is_open')->default(0);
+            $table->unsignedInteger('likes_count')->default(0);
+            $table->boolean('is_published')->default(1);
             $table->timestamps();
             $table->softDeletes();
         });

@@ -12,7 +12,7 @@
     "require": {
         "php": "^8.2",
         "algolia/algoliasearch-client-php": "^3.4",
-        "laravel/framework": "^11.0",
+        "laravel/framework": "^11.9",
         "laravel/sanctum": "^4.0",
         "laravel/scout": "^10.9",
         "laravel/socialite": "^5.14",
@@ -27,14 +27,14 @@
         "fakerphp/faker": "^1.23",
         "kimchanhyung98/laravel-maker": "^0.1.1",
         "larastan/larastan": "^2.0",
+        "laravel-shift/blueprint": "^2.10",
         "laravel/pint": "^1.13",
         "laravel/sail": "^1.26",
         "mockery/mockery": "^1.6",
         "nunomaduro/collision": "^8.0",
         "phpunit/phpunit": "^11.0.1",
         "roave/security-advisories": "dev-latest",
-        "spatie/laravel-ignition": "^2.4",
-        "zircote/swagger-php": "^4.9"
+        "spatie/laravel-ignition": "^2.4"
     },
     "autoload": {
         "psr-4": {
@@ -64,7 +64,7 @@
             "@php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\"",
             "@php artisan migrate --graceful --ansi"
         ],
-        "format": "./vendor/bin/pint --preset laravel",
+        "pint": "./vendor/bin/pint --preset laravel",
         "stan" : "./vendor/bin/phpstan analyse --memory-limit=2G",
         "swagger": "./vendor/bin/openapi app -o openapi.yaml -b swagger-config.php"
     },

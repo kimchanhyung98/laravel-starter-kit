@@ -9,7 +9,7 @@ class UserDestroyRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'deleted_reason' => ['required', 'string', 'max:200'],
+            'deleted_reason' => ['nullable', 'string', 'max:200'],
         ];
     }
 

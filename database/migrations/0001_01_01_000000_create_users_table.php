@@ -15,15 +15,13 @@ return new class extends Migration
             $table->id();
             $table->string('name', 50);
             $table->string('nickname', 50)->unique();
-            $table->string('email', 200)->nullable()->unique();
+            $table->string('email', 100)->nullable()->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password', 100)->nullable();
-            $table->string('phone', 20)->nullable();
-
+            $table->string('phone', 20)->nullable()->unique();
+            $table->string('password', 200)->nullable();
             $table->string('provider', 20)->nullable();
-            $table->string('provider_id', 100)->nullable();
-            $table->string('provider_token', 100)->nullable();
-
+            $table->string('provider_id', 200)->nullable();
+            $table->string('provider_token', 200)->nullable();
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
