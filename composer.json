@@ -64,7 +64,7 @@
             "@php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\"",
             "@php artisan migrate --graceful --ansi"
         ],
-        "format": "./vendor/bin/pint --preset laravel",
+        "pint": "./vendor/bin/pint --preset laravel",
         "stan" : "./vendor/bin/phpstan analyse --memory-limit=2G",
         "swagger": "./vendor/bin/openapi app -o openapi.yaml -b swagger-config.php"
     },
