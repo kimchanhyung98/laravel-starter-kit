@@ -23,7 +23,7 @@
         "socialiteproviders/kakao": "^4.3"
     },
     "require-dev": {
-        "dedoc/scramble": "^0.10.4",
+        "dedoc/scramble": "^0.11.0",
         "fakerphp/faker": "^1.23",
         "kimchanhyung98/laravel-maker": "^0.1.1",
         "larastan/larastan": "^2.0",

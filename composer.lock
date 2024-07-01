@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "971a3d28a3662fbd5b53045f22d931ad",
+    "content-hash": "50d4a26a730db1bc84374fff8b4c6b3b",
     "packages": [
         {
             "name": "algolia/algoliasearch-client-php",
@@ -6998,16 +6998,16 @@
     "packages-dev": [
         {
             "name": "dedoc/scramble",
-            "version": "v0.10.13",
+            "version": "v0.11.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dedoc/scramble.git",
-                "reference": "d8c3ed9c69fe6c0900f22ec0c7520b9b579d9ec3"
+                "reference": "6a0ee09f4ae3c5ca8aa740feacbf0c4edb02b455"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dedoc/scramble/zipball/d8c3ed9c69fe6c0900f22ec0c7520b9b579d9ec3",
-                "reference": "d8c3ed9c69fe6c0900f22ec0c7520b9b579d9ec3",
+                "url": "https://api.github.com/repos/dedoc/scramble/zipball/6a0ee09f4ae3c5ca8aa740feacbf0c4edb02b455",
+                "reference": "6a0ee09f4ae3c5ca8aa740feacbf0c4edb02b455",
                 "shasum": ""
             },
             "require": {
@@ -7060,7 +7060,7 @@
             ],
             "support": {
                 "issues": "https://github.com/dedoc/scramble/issues",
-                "source": "https://github.com/dedoc/scramble/tree/v0.10.13"
+                "source": "https://github.com/dedoc/scramble/tree/v0.11.0"
             },
             "funding": [
                 {
@@ -7068,7 +7068,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-06-05T17:01:46+00:00"
+            "time": "2024-06-29T07:47:47+00:00"
         },
         {
             "name": "fakerphp/faker",
