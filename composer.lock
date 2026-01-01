@@ -7238,16 +7238,16 @@
     "packages-dev": [
         {
             "name": "dedoc/scramble",
-            "version": "v0.13.2",
+            "version": "v0.13.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dedoc/scramble.git",
-                "reference": "0879b46a2b398e7e55598f5a25e0783c3e3ae43c"
+                "reference": "fd73178629c0a5ddc59eeac4fd605d4820b60f11"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dedoc/scramble/zipball/0879b46a2b398e7e55598f5a25e0783c3e3ae43c",
-                "reference": "0879b46a2b398e7e55598f5a25e0783c3e3ae43c",
+                "url": "https://api.github.com/repos/dedoc/scramble/zipball/fd73178629c0a5ddc59eeac4fd605d4820b60f11",
+                "reference": "fd73178629c0a5ddc59eeac4fd605d4820b60f11",
                 "shasum": ""
             },
             "require": {
@@ -7306,7 +7306,7 @@
             ],
             "support": {
                 "issues": "https://github.com/dedoc/scramble/issues",
-                "source": "https://github.com/dedoc/scramble/tree/v0.13.2"
+                "source": "https://github.com/dedoc/scramble/tree/v0.13.10"
             },
             "funding": [
                 {
@@ -7314,7 +7314,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-10-30T14:12:39+00:00"
+            "time": "2025-12-29T08:30:07+00:00"
         },
         {
             "name": "fakerphp/faker",
