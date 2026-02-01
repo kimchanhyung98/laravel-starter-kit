@@ -7238,16 +7238,16 @@
     "packages-dev": [
         {
             "name": "dedoc/scramble",
-            "version": "v0.13.10",
+            "version": "v0.13.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dedoc/scramble.git",
-                "reference": "fd73178629c0a5ddc59eeac4fd605d4820b60f11"
+                "reference": "871dbac4888e3d22d7f04c2c7b3d7bb810e87005"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dedoc/scramble/zipball/fd73178629c0a5ddc59eeac4fd605d4820b60f11",
-                "reference": "fd73178629c0a5ddc59eeac4fd605d4820b60f11",
+                "url": "https://api.github.com/repos/dedoc/scramble/zipball/871dbac4888e3d22d7f04c2c7b3d7bb810e87005",
+                "reference": "871dbac4888e3d22d7f04c2c7b3d7bb810e87005",
                 "shasum": ""
             },
             "require": {
@@ -7306,7 +7306,7 @@
             ],
             "support": {
                 "issues": "https://github.com/dedoc/scramble/issues",
-                "source": "https://github.com/dedoc/scramble/tree/v0.13.10"
+                "source": "https://github.com/dedoc/scramble/tree/v0.13.11"
             },
             "funding": [
                 {
@@ -7314,7 +7314,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-12-29T08:30:07+00:00"
+            "time": "2026-01-28T14:02:15+00:00"
         },
         {
             "name": "fakerphp/faker",
@@ -8291,16 +8291,16 @@
         },
         {
             "name": "phpstan/phpdoc-parser",
-            "version": "2.3.0",
+            "version": "2.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpdoc-parser.git",
-                "reference": "1e0cd5370df5dd2e556a36b9c62f62e555870495"
+                "reference": "a004701b11273a26cd7955a61d67a7f1e525a45a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/1e0cd5370df5dd2e556a36b9c62f62e555870495",
-                "reference": "1e0cd5370df5dd2e556a36b9c62f62e555870495",
+                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/a004701b11273a26cd7955a61d67a7f1e525a45a",
+                "reference": "a004701b11273a26cd7955a61d67a7f1e525a45a",
                 "shasum": ""
             },
             "require": {
@@ -8332,9 +8332,9 @@
             "description": "PHPDoc parser with support for nullable, intersection and generic types",
             "support": {
                 "issues": "https://github.com/phpstan/phpdoc-parser/issues",
-                "source": "https://github.com/phpstan/phpdoc-parser/tree/2.3.0"
+                "source": "https://github.com/phpstan/phpdoc-parser/tree/2.3.2"
             },
-            "time": "2025-08-30T15:50:23+00:00"
+            "time": "2026-01-25T14:56:51+00:00"
         },
         {
             "name": "phpstan/phpstan",
