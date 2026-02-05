@@ -1,0 +1,33 @@
+name: Documentation
+description: Report missing or unclear documentation
+title: "[Docs]: "
+labels: ["documentation"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Help us improve the docs by sharing what is missing or unclear.
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: What documentation needs attention?
+      placeholder: The README section about X is missing details about...
+    validations:
+      required: true
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: Suggested change
+      description: What would you like to see updated?
+      placeholder: Add an example showing...
+    validations:
+      required: true
+  - type: input
+    id: location
+    attributes:
+      label: Location
+      description: Where should the change be made (file or URL)?
+      placeholder: README.md, docs/api, etc.
+    validations:
+      required: false

@@ -1,0 +1,33 @@
+name: Maintenance Task
+description: Track refactors, chores, or project upkeep
+title: "[Maintenance]: "
+labels: ["maintenance"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this template to request maintenance or refactoring work.
+  - type: textarea
+    id: task
+    attributes:
+      label: Task description
+      description: What work needs to be done?
+      placeholder: Update dependency X or refactor Y...
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope or impact
+      description: What areas are affected?
+      placeholder: API, database, CI, etc.
+    validations:
+      required: false
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      description: What does done look like?
+      placeholder: Dependency updated and tests passing...
+    validations:
+      required: false
