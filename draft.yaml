@@ -1,0 +1,101 @@
+models:
+  User:
+    name: string:50
+    nickname: string:50 unique
+    email: string:100 nullable unique
+    phone: string:20 nullable unique
+    password: string:100 nullable
+    timestamps
+    softDeletes
+    relationships:
+      hasMany: Post, Comment, Like
+
+  Post:
+    user_id: id foreign:users.id
+    type: enum:free,notice,faq nullable
+    title: string:100
+    content: longtext
+    hit: unsignedInteger default:0
+    comments_count: unsignedInteger default:0
+    likes_count: unsignedInteger default:0
+    published_at: timestamp nullable
+    timestamps
+    softDeletes
+    relationships:
+      belongsTo: User
+      hasMany: Comment
+      morphMany: Like
+
+  Comment:
+    user_id: id foreign:users.id
+    post_id: id foreign:posts.id
+    parent_id: id foreign:comments.id nullable
+    content: text
+    likes_count: unsignedInteger default:0
+    timestamps
+    softDeletes
+    relationships:
+      belongsTo: User, Post
+      morphMany: Like
+
+  Like:
+    user_id: id foreign:users.id
+    timestamps
+    softDeletes
+    relationships:
+      belongsTo: User
+      morphTo: likeable
+
+seeders: User, Post, Comment, Like
+
+controllers:
+  User:
+    resource: api.store, api.show, api.update, api.destroy
+    store:
+      validate: name, nickname, email, password
+      save: user
+    show:
+      find: user
+    update:
+      validate: name, nickname, email, password
+      update: user
+    destroy:
+      validate: deleted_reason
+      delete: user
+
+  Post:
+    resource: api
+    index:
+      validate: search, per_page
+    store:
+      validate: title, content
+      save: post
+    show:
+      find: post
+      with: comments
+    edit:
+      find: post
+    update:
+      validate: title, content
+      update: post
+    destroy:
+      delete: post
+
+  Comment:
+    resource: api.store, api.update, api.destroy
+    store:
+      validate: post_id, content
+      save: comment
+    update:
+      validate: content
+      update: comment
+    destroy:
+      delete: comment
+
+  Like:
+    resource: api.store, api.destroy
+    store:
+      validate: likeable_id, likeable_type
+      save: like
+    destroy:
+      delete: like
