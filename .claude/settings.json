@@ -1,0 +1,120 @@
+{
+  "respectGitignore": true,
+  "cleanupPeriodDays": 21,
+  "attribution": {
+    "commit": "Co-Authored-By: Claude <noreply@anthropic.com>",
+    "pr": ""
+  },
+  "permissions": {
+    "deny": [
+      "Read(.env)",
+      "Read(.env.prod*)",
+      "Read(**/*.pem)",
+      "Read(**/*.key)",
+      "Read(**/*.p12)",
+      "Read(**/*.pfx)",
+      "Read(**/*.crt)",
+      "Read(**/*.cer)",
+      "Read(**/*.jks)",
+      "Read(**/*.keystore)",
+      "Read(**/*.tfvars)",
+      "Read(**/id_rsa*)",
+      "Read(**/id_ed25519*)",
+      "Read(**/.ssh/*)",
+      "Read(**/.aws/*)",
+      "Read(**/credentials.json)",
+      "Edit(../**)",
+      "Write(../**)"
+    ],
+    "defaultMode": "bypassPermissions"
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Write|Edit|Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": ".claude/hooks/scope-guard.sh",
+            "timeout": 5000
+          }
+        ]
+      }
+    ]
+  },
+  "enabledPlugins": {
+    "agent-browser@agent-browser": true,
+    "agent-sdk-dev@claude-plugins-official": false,
+    "asana@claude-plugins-official": false,
+    "atlassian@claude-plugins-official": false,
+    "circleback@claude-plugins-official": false,
+    "clangd-lsp@claude-plugins-official": false,
+    "claude-code-setup@claude-plugins-official": true,
+    "claude-md-management@claude-plugins-official": true,
+    "code-review@claude-plugins-official": true,
+    "code-simplifier@claude-plugins-official": true,
+    "codex@openai-codex": true,
+    "commit-commands@claude-plugins-official": true,
+    "context7@claude-plugins-official": true,
+    "csharp-lsp@claude-plugins-official": false,
+    "explanatory-output-style@claude-plugins-official": false,
+    "feature-dev@claude-plugins-official": false,
+    "figma@claude-plugins-official": false,
+    "firecrawl@claude-plugins-official": true,
+    "firebase@claude-plugins-official": false,
+    "frontend-design@claude-plugins-official": false,
+    "github@claude-plugins-official": false,
+    "gitlab@claude-plugins-official": false,
+    "gopls-lsp@claude-plugins-official": false,
+    "greptile@claude-plugins-official": false,
+    "hookify@claude-plugins-official": true,
+    "huggingface-skills@claude-plugins-official": false,
+    "jdtls-lsp@claude-plugins-official": false,
+    "kotlin-lsp@claude-plugins-official": false,
+    "laravel-boost@claude-plugins-official": true,
+    "learning-output-style@claude-plugins-official": false,
+    "linear@claude-plugins-official": false,
+    "php-lsp@claude-plugins-official": true,
+    "pinecone@claude-plugins-official": false,
+    "playground@claude-plugins-official": true,
+    "playwright@claude-plugins-official": true,
+    "plugin-dev@claude-plugins-official": false,
+    "pr-review-toolkit@claude-plugins-official": true,
+    "pyright-lsp@claude-plugins-official": false,
+    "ralph-loop@claude-plugins-official": true,
+    "remember@claude-plugins-official": true,
+    "rust-analyzer-lsp@claude-plugins-official": false,
+    "security-guidance@claude-plugins-official": true,
+    "sentry@claude-plugins-official": false,
+    "serena@claude-plugins-official": false,
+    "skill-creator@claude-plugins-official": true,
+    "sourcegraph@claude-plugins-official": true,
+    "stripe@claude-plugins-official": false,
+    "supabase@claude-plugins-official": false,
+    "superpowers@claude-plugins-official": true,
+    "swift-lsp@claude-plugins-official": false,
+    "typescript-lsp@claude-plugins-official": false,
+    "vercel@claude-plugins-official": true
+  },
+  "extraKnownMarketplaces": {
+    "vercel-labs": {
+      "source": {
+        "source": "github",
+        "repo": "vercel-labs/agent-browser"
+      }
+    },
+    "openai-codex": {
+      "source": {
+        "source": "github",
+        "repo": "openai/codex-plugin-cc"
+      }
+    }
+  },
+  "language": "korean",
+  "spinnerTipsEnabled": false,
+  "alwaysThinkingEnabled": true,
+  "companyAnnouncements": [
+    "\nWelcome to base!\nRun 'make init' on first launch."
+  ],
+  "autoUpdatesChannel": "latest"
+}

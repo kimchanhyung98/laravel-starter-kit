@@ -1,3 +1,4 @@
+# Laravel
 /.phpunit.cache
 /bootstrap/ssr
 /node_modules
@@ -10,10 +11,6 @@
 /resources/js/routes
 /resources/js/wayfinder
 /vendor
-.DS_Store
-.env
-.env.backup
-.env.production
 .phpactor.json
 .phpunit.result.cache
 Homestead.json
@@ -21,8 +18,118 @@ Homestead.yaml
 npm-debug.log
 yarn-error.log
 /auth.json
-/.fleet
-/.idea
-/.nova
-/.vscode
-/.zed
+
+# env
+.env
+.env.bak
+.env.backup
+.env.local
+.env.local.*
+.env.production
+.env.production.*
+
+# Cache
+/temp/
+/tmp/
+*.cache
+*.tmp
+*.swp
+*.swo
+
+# Log
+*.log
+*.log.*
+
+# Key
+*.pem
+*.key
+*.crt
+*.cert
+*.p12
+*.pfx
+secrets/
+.secrets
+.secrets/
+credentials.json
+
+# IDE
+.idea/
+.vscode/
+.fleet/
+.nova/
+.zed/
+*.code-workspace
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Agents (Copilot)
+.agents/*
+!.agents/skills/
+
+# Augment
+.augment/
+
+# Amazon Q
+.amazonq/
+
+# Codebuddy
+.codebuddy/
+
+# Cursor
+.cursor/*
+!.cursor/mcp.json
+!.cursor/skills/
+
+# Gemini
+.gemini/*
+!.gemini/settings.json
+
+# Kilocode
+.kilocode/
+
+# Opencode
+.opencode/
+
+# Qwen
+.qwen/
+
+# Roo
+.roo/
+
+# Windsurf
+.windsurf/
+
+# Claude
+**/CLAUDE.md
+!/CLAUDE.md
+.claude/commands/speckit.*
+.claude/hooks/.permissions-checked
+.claude/memory/*
+!.claude/memory/.gitkeep
+.claude/plans
+.claude/settings.local.json
+.remember
+
+# Codex
+.codex/commands/speckit.*
+.codex/memory/*
+!.codex/memory/.gitkeep
+
+# GitHub
+.github/agents/*
+!.github/agents/*.agent.md
+.github/prompts/*
+
+# Agent-OS
+.agent-os/
+agent-os/
+
+# Spec-Kit
+.specify/
+.speckit/
+specs/
+
+# etc
+.cmux

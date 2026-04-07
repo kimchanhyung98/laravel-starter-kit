@@ -1,0 +1,58 @@
+name: PR Title Check
+
+on:
+  pull_request:
+    types:
+      - opened
+      - edited
+      - synchronize
+      - labeled
+      - unlabeled
+
+permissions:
+  pull-requests: read
+  statuses: write
+
+jobs:
+  main:
+    name: Validate PR title
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check bot user
+        id: bot-check
+        env:
+          PR_USER_TYPE: ${{ github.event.pull_request.user.type }}
+        run: |
+          if [[ "$PR_USER_TYPE" == "Bot" ]]; then
+            echo "✓ Bot user detected - skipping validation"
+            echo "is_bot=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "is_bot=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: amannn/action-semantic-pull-request@v6
+        if: steps.bot-check.outputs.is_bot != 'true'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          # Scope is optional (allows both `type: title` and `type(scope): title`)
+          requireScope: false
+
+          # Disallow uppercase scopes
+          disallowScopes: |
+            [A-Z]+
+
+          # Work in progress PR support
+          wip: true
+
+          # Skip validation for PRs with these labels
+          ignoreLabels: |
+            bot
+            ignore-semantic-pull-request
+
+          # Ensure the subject doesn't start with an uppercase character
+          subjectPattern: ^[a-z].*$
+          subjectPatternError: |
+            The subject "{subject}" found in the pull request title "{title}"
+            didn't match the configured pattern. Please ensure that the subject
+            starts with a lowercase character.

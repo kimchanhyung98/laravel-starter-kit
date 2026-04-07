@@ -1,0 +1,48 @@
+name: Branch Name Check
+
+on:
+  pull_request:
+    types: [ opened, synchronize, reopened, edited ]
+
+permissions:
+  contents: read
+
+jobs:
+  validate-branch-name:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check bot user
+        id: bot-check
+        env:
+          PR_USER_TYPE: ${{ github.event.pull_request.user.type }}
+        run: |
+          if [[ "$PR_USER_TYPE" == "Bot" ]]; then
+            echo "✓ Bot user detected - skipping validation"
+            echo "is_bot=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "is_bot=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Validate branch name
+        if: steps.bot-check.outputs.is_bot == 'false'
+        env:
+          BRANCH: ${{ github.head_ref }}
+        run: |
+          echo "Checking branch name: $BRANCH"
+
+          # 보호 브랜치는 검사하지 않음
+          if [[ "$BRANCH" =~ ^(main|master|develop|staging)$ ]]; then
+            echo "✓ Protected branch - skipping validation"
+            exit 0
+          fi
+
+          # 패턴: type/description 또는 type/segment1/segment2/... (depth 제한 없음)
+          # 허용: 소문자(a-z), 숫자(0-9), 하이픈(-), 점(.), 언더바(_)
+          PATTERN="^[a-z]+/[a-z0-9][a-z0-9._-]*(/[a-z0-9][a-z0-9._-]*)*$"
+
+          if [[ ! "$BRANCH" =~ $PATTERN ]]; then
+            echo "❌ Invalid branch name: $BRANCH"
+            exit 1
+          fi
+
+          echo "✓ Branch name is valid"
