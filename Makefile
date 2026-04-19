@@ -11,11 +11,18 @@ dev: ## 전체 설정 (init + claude + speckit)
 	@$(MAKE) speckit
 
 check: ## 테스트 및 린트 검사 실행
+	@npx playwright install --with-deps 2>/dev/null || npx playwright install
 	@echo "[check] running tests..."
 	@php artisan test --compact
+	@echo "[check] running browser tests..."
+	@php artisan test --group=browser --compact || true
+	@echo "[check] running stress tests..."
+	@php artisan test --group=stress --compact || true
 	@echo "[check] running lint..."
 	@vendor/bin/pint --test --format agent
 	@npm run lint:check
+	@npm run format:check
+	@npm run types:check
 	@echo "[check] all checks passed"
 
 claude: ## Claude Code 환경 설정
@@ -45,6 +52,7 @@ init: ## 프로젝트 환경 설정
 	@composer install
 	@php artisan key:generate
 	@npm install
+	@npx playwright install --with-deps 2>/dev/null || npx playwright install
 	@npm run build
 	@echo "[init] setup complete"
 

@@ -1,5 +1,6 @@
 # Laravel
 /.phpunit.cache
+/tests/Browser/Screenshots
 /bootstrap/ssr
 /node_modules
 /public/build

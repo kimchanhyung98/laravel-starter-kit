@@ -52,6 +52,7 @@
             "@php artisan key:generate",
             "@php artisan migrate --force",
             "npm install",
+            "npx playwright install",
             "npm run build"
         ],
         "dev": [
@@ -75,6 +76,14 @@
             "@php artisan config:clear --ansi",
             "@lint:check",
             "@php artisan test"
+        ],
+        "test:browser": [
+            "Composer\\Config::disableProcessTimeout",
+            "@php artisan test --group=browser"
+        ],
+        "test:stress": [
+            "Composer\\Config::disableProcessTimeout",
+            "@php artisan test --group=stress"
         ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
