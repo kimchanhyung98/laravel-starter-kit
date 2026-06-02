@@ -14,7 +14,7 @@
         "algolia/algoliasearch-client-php": "^4.18",
         "laravel/framework": "^11.9",
         "laravel/sanctum": "^4.0",
-        "laravel/scout": "^10.9",
+        "laravel/scout": "^11.2",
         "laravel/socialite": "^5.14",
         "laravel/tinker": "^2.9",
         "league/flysystem-aws-s3-v3": "^3.27",
